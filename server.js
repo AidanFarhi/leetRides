@@ -22,4 +22,11 @@ const init = async() => {
 init()
 
 app.use('/items', require('./routes/itemRoutes'))
+app.use('/users', require('./routes/userRoutes'))
 
+// Error catching endware
+app.use((err, req, res, next) => {
+    console.error(err, typeof next)
+    console.error(err.stack)
+    res.status(err.status || 500).send(err.message || 'Internal server error.')
+})

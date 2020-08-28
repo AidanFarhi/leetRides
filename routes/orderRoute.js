@@ -1,5 +1,5 @@
 const { Router }  = require('express')
-const Orders = require('../models/items')
+const Orders = require('../models/orders')
 const router = new Router()
 
 // route for the order associated with a user

@@ -4,7 +4,7 @@ import '../cmp-styles/AllItems.css'
 
 export default function AllItems() {
     const [state, setState] = useState({
-        cars: []
+        cars: [],
     })
 
     useEffect(() => {

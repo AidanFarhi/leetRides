@@ -21,7 +21,7 @@ export default function NavBar() {
 
     return (
         <div className='nav-main-div'>
-            <Link to='/home'><h1>LeetRides</h1></Link>
+            <Link to='/'><h1>LeetRides</h1></Link>
             <form id='search-form' onSubmit={search}>
                 <input type='text' 
                     placeholder='Find your ride..' 

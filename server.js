@@ -14,14 +14,3 @@ app.listen(PORT, ()=> {
 
 app.use('/items', require('./routes/itemRoutes'))
 
-app.get('/api/students', (req, res) => {
-    const students = [
-        {id: 1, name: 'Aidan', pets: ['doobi', 'poopie', 'loopy']},
-        {id: 2, name: 'Bob', pets: ['doobi', 'poopie', 'loopy']},
-        {id: 3, name: 'Yori', pets: ['doobi', 'poopie', 'loopy']},
-        {id: 4, name: 'Freind', pets: ['s', 'poopie']},
-        {id: 5, name: 'Nola', pets: ['doobi', 'poopie', 'loopy']},
-        {id: 6, name: 'Dia'},
-    ]
-    res.json(students)
-})

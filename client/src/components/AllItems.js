@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import '../cmp-styles/AllItems.css'
 
 export default function AllItems() {
     const [state, setState] = useState({
@@ -14,7 +15,7 @@ export default function AllItems() {
                     cars: data.map((car, i) => {
                         return(
                             <div key={i}>
-                                <img src={car.imageUrl}></img>
+                                <img src={car.imageUrl} alt='a nice car'></img>
                                 <h3>{car.name}</h3>
                                 <h3>${car.price}.00</h3>
                                 <h3>{car.description}</h3>

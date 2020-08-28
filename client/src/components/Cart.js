@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function AllItems() {
+export default function Cart() {
     return (
         <div>
-            This is all the cars
+            This is all the Cart
         </div>
     )
 }

@@ -1,13 +1,14 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-// import {Projects, Resume, About} from './components'
+import {Home, AllItems, AllUsers, Cart} from './components'
 
 export default function Routes() {
     return (
         <Switch>
-            {/* <Route path='/cars' component={About}/>
-            <Route path='/projects' component={Projects}/>
-            <Route path='/resume' component={Resume} /> */}
+            <Route path='/home' component={Home}/>
+            <Route path='/cars' component={AllItems}/>
+            <Route path='/drivers' component={AllUsers}/>
+            <Route path='/cart' component={Cart}/>
         </Switch>
     )
 }

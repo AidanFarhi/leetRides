@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import '../cmp-styles/AllUsers.css'
+import {Link} from 'react-router-dom'
 
 export default function AllUsers() {
 
@@ -14,9 +16,9 @@ export default function AllUsers() {
                 setState({
                     users: data.map((user, i) => {
                         return(
-                            <div key={i}>
+                            <div key={i} className='user-div'>
                                 <img src={user.imageUrl} alt='an user icon'></img>
-                                <h3>{user.name}</h3>
+                                <Link key={i} to={{pathname:'/driver', query:{id: user.id.toString()}}}><h3>{user.name}</h3></Link>
                                 <h3>{user.address}</h3>
                                 <h3>{user.email}</h3>
                                 <hr></hr>

@@ -1,21 +1,21 @@
 const db = require('./db');
-const {Sequelize} = require('sequelize');
-
+const {DataTypes} = require('sequelize');
+    
 const Items = db.define('cars', {
     name: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNULL: false,
     },
     price: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNULL:false,
     },
     description: {
-        type: Sequelize.STRING(500),
+        type: DataTypes.STRING(500),
         allowNull: false,
     },
     imageUrl:  {
-        type: Sequelize.STRING(300),
+        type: DataTypes.STRING(300),
         allowNULL: false,
     }
 })

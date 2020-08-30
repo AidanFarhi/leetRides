@@ -27,13 +27,12 @@ router.get('/:id', async(req, res, next) => {
 // route to login user
 router.post('/login', async(req, res, next) => {
     try {
-        console.log(req.body)
         const {name, password} = req.body
         const user = await Users.findAll({where: {name: name}})
         if (user.length === 0) res.send({result: 'username-not-found'})
         const check = await bcrypt.compare(password, user[0].password)
         if (check) {
-            res.send({result: 'login-succesful', user: user})
+            res.send({result: 'login-succesful', user: user[0]})
         } else {
             res.send({result: 'password-incorrect'})
         }
@@ -43,7 +42,6 @@ router.post('/login', async(req, res, next) => {
 //route to create user
 router.post('/register', async(req, res, next) => {
     try {
-        console.log(req.body)
         const {name, imageUrl, address, email, password} = req.body
         const check  = await Users.findAll({where: {name: name}})
         if (check.length > 0) res.send('user-exists')

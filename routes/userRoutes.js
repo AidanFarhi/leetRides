@@ -27,16 +27,17 @@ router.get('/:id', async(req, res, next) => {
 // route to login user
 router.post('/login', async(req, res, next) => {
     try {
-        const {name, password} = req.body
-        const user = await Users.findAll({where: {name: name}})
-        if (user.length === 0) res.send('username-not-found')
-        console.log(user[0].password)
-        const check = await bcrypt.compare(password, user[0].password)
-        if (check) {
-            res.send('login-succesful')
-        } else {
-            res.send('password-incorrect')
-        }
+        res.send(req.body)
+        // const {name, password} = req.body
+        // const user = await Users.findAll({where: {name: name}})
+        // if (user.length === 0) res.send('username-not-found')
+        // console.log(user[0].password)
+        // const check = await bcrypt.compare(password, user[0].password)
+        // if (check) {
+        //     res.send('login-succesful')
+        // } else {
+        //     res.send('password-incorrect')
+        // }
     } catch(er) {next(er)}
 })
 

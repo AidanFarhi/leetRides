@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 
 export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
@@ -14,7 +15,6 @@ export default function Login(props) {
             password: event.target.value
         })
     }
-
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
@@ -25,10 +25,11 @@ export default function Login(props) {
             })
             const login = await response.json()
             if (login.result === 'login-succesful') {
-                props.method(login.user)
+                props.methods[0](login.user)
             }
         } catch(er) {console.log(er)}
     }
+
     return (
         <div id='login-form-div'>
             <h1>Welcome</h1>
@@ -40,7 +41,11 @@ export default function Login(props) {
             <h1>{username.username}</h1>
             <h2>{password.password}</h2>
             <hr></hr>
+            <h2>Continue as guest</h2>
+            <button onClick={props.methods[1]}>Guest Login</button>
+            <hr></hr>
             <h2>Create an account</h2>
+            <Link to='/register'>Register</Link>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
-export default function NavBar() {
+export default function NavBar(props) {
     const [state, setState] = useState({
         text: ''
     })
@@ -34,6 +34,7 @@ export default function NavBar() {
                 <Link to='/cars'>Cars</Link>
                 <Link to='/drivers'>Drivers</Link>
                 <Link to='/cart'>Cart</Link>
+                <button onClick={props.method}>Logout</button>
             </div>
             <h1>
                 {state.text}

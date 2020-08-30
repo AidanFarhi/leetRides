@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import {Home, AllItems, AllUsers, Cart, SingleUser, SingleItem} from './components'
+import {Home, AllItems, AllUsers, Cart, SingleUser, SingleItem, Register} from './components'
 
 export default function Routes() {
     return (
@@ -11,6 +11,7 @@ export default function Routes() {
             <Route path='/cart' component={Cart}/>
             <Route path='/driver' component={SingleUser}/>
             <Route path='/car' component={SingleItem} />
+            <Route path='/register' component={Register} />
         </Switch>
     )
 }

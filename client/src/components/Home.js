@@ -21,6 +21,28 @@ export default function Home() {
         })
     }
 
+    const loginGuest = () => {
+        localStorage.setItem('loggedIn', 'true')
+        localStorage.setItem('name', 'guest')
+        localStorage.setItem('id', 'none')
+        setState({
+            loggedIn: true,
+            userName: 'guest',
+            userId: 'none'
+        })
+    }
+
+    const logout = () => {
+        localStorage.removeItem('loggedIn')
+        localStorage.removeItem('name')
+        localStorage.removeItem('id')
+        setState({
+            loggedIn: false,
+            userName: '',
+            userId: null
+        })
+    }
+
     useEffect(()=> {
         if (localStorage.getItem('loggedIn') === 'true') {
             setState({
@@ -31,11 +53,14 @@ export default function Home() {
         }
     }, [])
 
+    // these get passed to the login component
+    const methods = [login, loginGuest]
+
     return(
         <div id='home-main-div'>
-            <NavBar />
+            <NavBar method={logout}/>
             This is the home page
-            {!state.loggedIn ? <Login method={login}/> : null}
+            {!state.loggedIn ? <Login methods={methods}/> : null}
             <Routes />
         </div>
     )

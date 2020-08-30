@@ -44,15 +44,13 @@ export default function Login(props) {
                 <input type='password' name='password' placeholder='Password' value={password.password} onChange={handlePassword} required/>
                 <button type='submit'>Login</button>   
             </form>
-            <h1>{username.username}</h1>
-            <h2>{password.password}</h2>
             <hr></hr>
+            <button onClick={handleRegister}>Register</button>
+            {registering.registering ? <Register method={props.methods[0]}/> : null}
+            <h2>-------- or -------</h2>
             <h2>Continue as guest</h2>
             <button onClick={props.methods[1]}>Guest Login</button>
             <hr></hr>
-            <h2>Create an account</h2>
-            <button onClick={handleRegister}>Register</button>
-            {registering.registering ? <Register method={props.methods[0]}/> : null}
         </div>
     )
 }

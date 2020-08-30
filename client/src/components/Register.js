@@ -4,13 +4,13 @@ export default function Register(props) {
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
     const [imageUrl, setImageUrl] = useState({imageUrl: ''})
-    const [address, setAdress] = useState({address: ''})
-    const [email, setEmail] = useState({address: ''})
+    const [address, setAddress] = useState({address: ''})
+    const [email, setEmail] = useState({email: ''})
 
     const handleUsername = (event) => setUsername({username: event.target.value})
     const handlePassword = (event) => setPassword({password: event.target.value})
     const handleImageUrl = (event) => setImageUrl({imageUrl: event.target.value})
-    const handleAdress = (event) => setAdress({address: event.target.value})
+    const handleAddress = (event) => setAddress({address: event.target.value})
     const handleEmail = (event) => setEmail({email: event.target.value})
     
     const handleSubmit = async (event) => {
@@ -36,26 +36,19 @@ export default function Register(props) {
 
     return (
         <div id='register-form-div'>
-            <h1>Welcome</h1>
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Username' value={username.username} onChange={handleUsername} required/>
                 <br></br>
                 <input type='password' placeholder='Password' value={password.password} onChange={handlePassword} required/>
                 <br></br>
-                <input type='text' placeholder='Adress' value={address.address} onChange={handleAdress} required/>
+                <input type='text' placeholder='Address' value={address.address} onChange={handleAddress} required/>
                 <br></br>
                 <input type='text' placeholder='Email' value={email.email} onChange={handleEmail} required/>
                 <br></br>
-                <input type='text' placeholder='Profile Pic Url' value={imageUrl.imageUrl} onChange={handleImageUrl} required/>
+                <input type='text' placeholder='Profile Pic Url (optional)' value={imageUrl.imageUrl} onChange={handleImageUrl}/>
                 <br></br>
                 <button type='submit'>Create</button>   
             </form>
-            <h1>{username.username}</h1>
-            <h2>{password.password}</h2>
-            <h1>{imageUrl.imageUrl}</h1>
-            <h2>{address.address}</h2>
-            <h2>{email.email}</h2>
-            <hr></hr>
         </div>
     )
 }

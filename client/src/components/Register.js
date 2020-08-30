@@ -28,7 +28,7 @@ export default function Register(props) {
                 })
             })
             const create = await response.json()
-            if (create.result === 'user-created') {
+            if (create.response === 'user-created') {
                 props.method(create.newUser)
             }
         } catch(er) {console.log(er)}
@@ -39,10 +39,15 @@ export default function Register(props) {
             <h1>Welcome</h1>
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Username' value={username.username} onChange={handleUsername} required/>
+                <br></br>
                 <input type='password' placeholder='Password' value={password.password} onChange={handlePassword} required/>
+                <br></br>
                 <input type='text' placeholder='Adress' value={address.address} onChange={handleAdress} required/>
+                <br></br>
                 <input type='text' placeholder='Email' value={email.email} onChange={handleEmail} required/>
+                <br></br>
                 <input type='text' placeholder='Profile Pic Url' value={imageUrl.imageUrl} onChange={handleImageUrl} required/>
+                <br></br>
                 <button type='submit'>Create</button>   
             </form>
             <h1>{username.username}</h1>

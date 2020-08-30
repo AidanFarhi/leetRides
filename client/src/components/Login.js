@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-export default function Login() {
+export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
 
@@ -14,10 +14,20 @@ export default function Login() {
             password: event.target.value
         })
     }
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(username.username)
-        console.log(password.password)
+        try {
+            const response = await fetch('users/login', {
+                method: 'POST',
+                headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                body: JSON.stringify({name: username.username, password: password.password,})
+            })
+            const login = await response.json()
+            if (login.result === 'login-succesful') {
+                props.method(login.user)
+            }
+        } catch(er) {console.log(er)}
     }
     return (
         <div id='login-form-div'>

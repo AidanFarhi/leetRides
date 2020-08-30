@@ -4,7 +4,8 @@ const {DataTypes} = require("sequelize");
 const Users = db.define("user", {
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        isUnique: true
     },
     imageUrl:{
         type: DataTypes.STRING,
@@ -25,8 +26,8 @@ const Users = db.define("user", {
         },
     },
     password:{
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING(100),
+        allowNull: false,
     }
 })
 

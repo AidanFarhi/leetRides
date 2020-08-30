@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import Register from './Register'
 
 export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
+    const [registering, setRegister] = useState({registering: false})
 
     const handleUsername = (event) => {
         setUsername({
@@ -29,6 +30,11 @@ export default function Login(props) {
             }
         } catch(er) {console.log(er)}
     }
+    const handleRegister = () => {
+        setRegister({
+            registering: !registering.registering
+        })
+    }
 
     return (
         <div id='login-form-div'>
@@ -45,7 +51,8 @@ export default function Login(props) {
             <button onClick={props.methods[1]}>Guest Login</button>
             <hr></hr>
             <h2>Create an account</h2>
-            <Link to='/register'>Register</Link>
+            <button onClick={handleRegister}>Register</button>
+            {registering.registering ? <Register method={props.methods[0]}/> : null}
         </div>
     )
 }

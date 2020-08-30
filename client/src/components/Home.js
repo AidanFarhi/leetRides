@@ -20,7 +20,6 @@ export default function Home() {
             userId: user.id
         })
     }
-
     const loginGuest = () => {
         localStorage.setItem('loggedIn', 'true')
         localStorage.setItem('name', 'guest')
@@ -31,7 +30,6 @@ export default function Home() {
             userId: 'none'
         })
     }
-
     const logout = () => {
         localStorage.removeItem('loggedIn')
         localStorage.removeItem('name')

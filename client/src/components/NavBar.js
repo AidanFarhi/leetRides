@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 export default function NavBar(props) {
     const [state, setState] = useState({
@@ -10,7 +10,6 @@ export default function NavBar(props) {
             text: event.target.value
         })
     }
-
     const search = (event) => {
         event.preventDefault()
         console.log(state.text)

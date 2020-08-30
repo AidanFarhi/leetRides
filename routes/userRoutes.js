@@ -44,16 +44,16 @@ router.post('/register', async(req, res, next) => {
     try {
         const {name, imageUrl, address, email, password} = req.body
         const check  = await Users.findAll({where: {name: name}})
-        if (check.length > 0) res.send('user-exists')
+        if (check.length > 0) res.send({response: 'user-exists'})
         const hash = await bcrypt.hash(password, 10)
-        await Users.create({
+        const newUser = await Users.create({
             name: name,
             imageUrl: imageUrl,
             address: address,
             email: email,
             password: hash
         })
-        res.send('Success!')
+        res.send({response: 'user-created', newUser: newUser})
     } catch(er) {next(er)}
 })
 

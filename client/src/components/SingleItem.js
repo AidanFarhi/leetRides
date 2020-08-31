@@ -5,6 +5,18 @@ export default function SingleItem(props) {
         carData: {}
     })
 
+    const addItem = async() => {
+        try {
+            const response = await fetch('cart/add', {
+                method: 'POST',
+                headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                body: JSON.stringify({userId: localStorage.getItem('id'), itemId: state.carData.id})
+            })
+            const result = await response.json()
+            console.log(result.response)
+        } catch(er) {console.log(er)}
+    }
+
     useEffect(()=> {
         const getData = async() => {
             try {
@@ -25,6 +37,8 @@ export default function SingleItem(props) {
                 <h3>{state.carData.name}</h3>
                 <h3>{state.carData.price}</h3>
                 <h3>{state.carData.description}</h3>
+                <br></br>
+                <button onClick={addItem}>Add to cart</button>
                 <hr></hr>
             </div>
         </div>

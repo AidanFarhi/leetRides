@@ -5,7 +5,7 @@ const Orders = db.define('orders', {
     items: {
         type: DataTypes.ARRAY(DataTypes.INTEGER)
     },
-    staus: {
+    status: {
         type: DataTypes.ENUM('pending', 'fulfilled')
     }
 })

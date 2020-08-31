@@ -23,7 +23,7 @@ init()
 
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))
-app.use('/order', require('./routes/orderRoute'))
+app.use('/cart', require('./routes/orderRoutes'))
 
 // Error catching endware
 app.use((err, req, res, next) => {

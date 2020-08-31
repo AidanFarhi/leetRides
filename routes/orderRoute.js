@@ -1,11 +1,22 @@
 const { Router }  = require('express')
+const {Cart, Users, Orders} = require('../models')
 // const Orders = require('../models/orders')
 const router = new Router()
 
 // make a post to orders model here
-router.get('/', async(req, res, next) => {
+router.post('/', async(req, res, next) => {
     try {
-        console.log('hit orders')
+        const response = await Cart.findAll({where: {userId: req.body.userId}, include: Users})
+        const data = await response
+        await Orders.create({
+            name: data[0].user.name,
+            address: data[0].user.address,
+            email: data[0].user.email,
+            items: data[0].items,
+            status: 'shipping',
+            total: req.body.total
+        })
+        res.send({response: 'order-placed'})
     } catch(er) {next(er)}
 })
 

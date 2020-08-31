@@ -23,6 +23,9 @@ const Orders = db.define('orders', {
     },
     status: {
         type: DataTypes.ENUM('shipping', 'delivered')
+    },
+    total: {
+        type: DataTypes.INTEGER
     }
 })
 

@@ -3,17 +3,17 @@ const {Cart, Items} = require('../models')
 const { Sequelize, Op } = require('sequelize')
 const router = new Router()
 
-// route for the order associated with a user
+// route for the car associated with a user
 router.get('/:id', async(req, res, next) => {
     try {
         const response = await Cart.findAll({where: {userId: req.params.id}})
-        const order = await response
-        const cars = await Items.findAll({where: {id: order[0].items}})
+        const cart = await response
+        const cars = await Items.findAll({where: {id: cart[0].items}})
         res.send(cars)
     } catch(er) {next(er)}
 })
 
-// route to add item to order
+// route to add item to cart
 router.post('/add', async(req, res, next) => {
     try {
         const response = await Cart.findAll({where: {userId: req.body.userId}})
@@ -34,7 +34,7 @@ router.post('/add', async(req, res, next) => {
     } catch(er) {next(er)}
 })
 
-// route to remove item from order
+// route to remove item from cart
 router.post('/remove', async(req, res, next) => {
     try {
         const response = await Cart.findAll({where: {userId: req.body.userId}})

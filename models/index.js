@@ -5,6 +5,7 @@ const Cart = require('./userCart')
 const Orders = require('./orders')
 
 Users.hasOne(Cart, {foreignKey: 'userId'})
+Cart.belongsTo(Users)
 
 module.exports = {
     db,

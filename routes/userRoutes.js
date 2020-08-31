@@ -17,7 +17,7 @@ router.get('/', async(req, res, next) => {
 // route to fetch single user
 router.get('/:id', async(req, res, next) => {
     try {
-        const response = await Users.findAll({where: {id: req.params.id}, iclude: Orders})
+        const response = await Users.findAll({where: {id: req.params.id}, include: Orders})
         const user = await response
         res.send(user)
         

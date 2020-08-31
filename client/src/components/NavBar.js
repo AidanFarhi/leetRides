@@ -33,6 +33,7 @@ export default function NavBar(props) {
                 <Link to='/cars'>Cars</Link>
                 <Link to='/drivers'>Drivers</Link>
                 <Link to='/cart'>Cart</Link>
+                <Link to='/checkout'>Checkout</Link>
                 <button onClick={props.method}>Logout</button>
             </div>
             <h1>

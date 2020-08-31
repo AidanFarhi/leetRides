@@ -7,12 +7,15 @@ const Users = db.define("user", {
         allowNull: false,
         isUnique: true
     },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        isUnique: true
+    },
     imageUrl:{
         type: DataTypes.STRING,
         default: 'https://www.pikpng.com/pngl/m/326-3261783_person-icon-default-user-image-jpg-clipart.png',
-        validate:{
-            isUrl: true
-        }
+        allowNull: false,
     },
     address: {
         type: DataTypes.STRING,

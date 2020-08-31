@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 
 export default function Register(props) {
+    const [name, setName] = useState({name: ''})
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
     const [imageUrl, setImageUrl] = useState({imageUrl: ''})
     const [address, setAddress] = useState({address: ''})
     const [email, setEmail] = useState({email: ''})
 
+    const handleName = (event) => setName({name: event.target.value})
     const handleUsername = (event) => setUsername({username: event.target.value})
     const handlePassword = (event) => setPassword({password: event.target.value})
     const handleImageUrl = (event) => setImageUrl({imageUrl: event.target.value})
@@ -20,7 +22,8 @@ export default function Register(props) {
                 method: 'POST',
                 headers: {'Accept': 'application/json','Content-Type': 'application/json',},
                 body: JSON.stringify({
-                    name: username.username, 
+                    name: name.name,
+                    username: username.username, 
                     imageUrl: imageUrl.imageUrl,
                     address: address.address,
                     email: email.email,
@@ -37,6 +40,8 @@ export default function Register(props) {
     return (
         <div id='register-form-div'>
             <form onSubmit={handleSubmit}>
+                <input type='text' placeholder='Full Name' value={name.name} onChange={handleName} required/>
+                <br></br>
                 <input type='text' placeholder='Username' value={username.username} onChange={handleUsername} required/>
                 <br></br>
                 <input type='password' placeholder='Password' value={password.password} onChange={handlePassword} required/>

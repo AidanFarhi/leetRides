@@ -22,7 +22,7 @@ export default function Login(props) {
             const response = await fetch('users/login', {
                 method: 'POST',
                 headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                body: JSON.stringify({name: username.username, password: password.password,})
+                body: JSON.stringify({username: username.username, password: password.password,})
             })
             const login = await response.json()
             if (login.result === 'login-succesful') {

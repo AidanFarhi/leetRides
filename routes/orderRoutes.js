@@ -36,4 +36,18 @@ router.post('/add', async(req, res, next) => {
     } catch(er) {next(er)}
 })
 
+// route to remove item from order
+router.post('/remove', async(req, res, next) => {
+    try {
+        const response = await Orders.findAll({where: {userId: req.body.userId}})
+        const result = await response
+        const itemArray = result[0].items
+        console.log('old array:', itemArray)
+        const newArray = itemArray.filter(id => id !== req.body.itemId)
+        console.log('new array:', newArray)
+        await Orders.update({items: [...newArray],},{where: {userId: req.body.userId}})
+        res.send({response: 'item-deleted'})
+    } catch(er) {next(er)}
+})
+
 module.exports = router

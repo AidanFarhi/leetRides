@@ -28,7 +28,7 @@ export default function SingleItem(props) {
             } catch(er) {console.log(er)}
         }
         getData()
-    },[])
+    })
 
     return(
         <div>

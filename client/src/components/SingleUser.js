@@ -14,7 +14,6 @@ export default function SingleUser(props) {
                 const data = await response.json()
                 const cartResponse = await fetch(`cart/${data[0].id}`)
                 const cartData = await cartResponse.json()
-                console.log(cartData)
                 const cars = cartData.map((car, i) => {
                         return(
                             <div key={i}>
@@ -33,7 +32,7 @@ export default function SingleUser(props) {
             } catch(er) {console.log(er)}
         }
         getData()
-    },[])
+    })
 
     return(
         <div>

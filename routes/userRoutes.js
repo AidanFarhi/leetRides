@@ -1,8 +1,7 @@
 const { Router }  = require('express')
 const bcrypt = require('bcrypt')
-const Op = require('sequelize')
 const Users = require('../models/user')
-const Orders = require('../models/orders')
+const Cart = require('../models/userCart')
 const router = new Router()
 
 // route to fetch all users
@@ -17,7 +16,7 @@ router.get('/', async(req, res, next) => {
 // route to fetch single user
 router.get('/:id', async(req, res, next) => {
     try {
-        const response = await Users.findAll({where: {id: req.params.id}, include: Orders})
+        const response = await Users.findAll({where: {id: req.params.id}, include: Cart})
         const user = await response
         res.send(user)
         

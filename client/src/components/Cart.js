@@ -41,7 +41,7 @@ export default function Cart() {
     
     useEffect(()=> {
         getData()
-    })
+    },[])
 
     return (
         <div>

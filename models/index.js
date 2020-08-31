@@ -1,13 +1,13 @@
 const db = require('./db')
 const Items = require('./items')
 const Users = require('./user')
-const Orders = require('./orders')
+const Cart = require('./userCart')
 
-Users.hasOne(Orders, {foreignKey: 'userId'})
+Users.hasOne(Cart, {foreignKey: 'userId'})
 
 module.exports = {
     db,
     Items,
     Users,
-    Orders
+    Cart
 }

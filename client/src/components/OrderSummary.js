@@ -1,0 +1,29 @@
+import React, {setState, useEffect, useState} from 'react'
+
+export default function OrderSummary(props) {
+    const [state, setState] = useState({
+        order: []
+    })
+    useEffect(()=> {
+        const getOrders = async() => {
+            try {
+                const response = await fetch(`order/${props.location.state.id}`)
+                const orderData = await response.json()
+                console.log(orderData)
+                setState({
+                    order: orderData
+                })
+            } catch(er) {console.log(er)}
+        }
+        getOrders()
+    },[])
+
+    return (
+        <div>
+            <h2>Customer Name: {state.order.name}</h2>
+            <h2>Total: ${state.order.total}.00</h2>
+            <h2>Shipping To: {state.order.address}</h2>
+            <h2>Estimated Arrival: 5-7 business days</h2>
+        </div>
+    )
+}

@@ -6,6 +6,8 @@ const Orders = require('./orders')
 
 Users.hasOne(Cart, {foreignKey: 'userId'})
 Cart.belongsTo(Users)
+Users.hasMany(Orders, {foreignKey: 'userId'})
+Orders.belongsTo(Users)
 
 module.exports = {
     db,

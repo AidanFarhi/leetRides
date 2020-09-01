@@ -75,7 +75,7 @@ export default function Payment() {
 
     return (
         status.processed ? 
-            <Redirect to="/"/>
+            <Redirect to={{pathname: "/summary", state: {id: localStorage.getItem('id')} }}/>
         :
         <form onSubmit={handleSubmit}>
         <CardSection />

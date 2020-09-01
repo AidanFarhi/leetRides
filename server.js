@@ -12,7 +12,8 @@ const models = require('./models')
 const PORT = 4000
 const init = async() => {
     try {
-        models.db.sync()
+        models.Orders.sync({force: true})
+        // models.db.sync()
         console.log('all models succesfully syncronized')
     } catch(er) { console.log(er) }
     app.listen(PORT, ()=> {

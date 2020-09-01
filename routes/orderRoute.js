@@ -24,10 +24,22 @@ router.post('/', async(req, res, next) => {
             email: data[0].user.email,
             items: data[0].items,
             status: 'shipping',
-            total: totalCost
+            total: totalCost,
+            userId: data[0].user.id
         })
         await Cart.destroy({where: {userId: req.body.userId}})
         res.send({response: 'order-placed'})
+    } catch(er) {next(er)}
+})
+
+// this will get all the orders associated with the user
+router.get('/:id', async(req, res, next) => {
+    try {
+        const response = await Orders.findOne({where: {userId: req.params.id},
+            order: [['createdAt', 'DESC']]
+        })
+        const data = await response
+        res.send(data)
     } catch(er) {next(er)}
 })
 

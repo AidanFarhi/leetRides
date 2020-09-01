@@ -58,7 +58,8 @@ export default function Payment() {
                     headers: {'Accept': 'application/json','Content-Type': 'application/json',},
                     body: JSON.stringify({userId: Number(localStorage.getItem('id'))})
                 })
-                if (makeOrder.response === 'order-placed') {
+                const result = await makeOrder.json()
+                if (result.response === 'order-placed') {
                     setSuccess({processed: true})
                 }
             }

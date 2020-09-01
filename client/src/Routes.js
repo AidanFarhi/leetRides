@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import {Home, AllItems, AllUsers, Cart, SingleUser, SingleItem, Checkout} from './components'
+import {Home, AllItems, AllUsers, Cart, SingleUser, SingleItem, Checkout, Payment} from './components'
 
 export default function Routes() {
     return (
@@ -12,6 +12,7 @@ export default function Routes() {
             <Route path='/driver' component={SingleUser}/>
             <Route path='/car' component={SingleItem} />
             <Route path='/checkout' component={Checkout} />
+            <Route path='/pay' component={Payment} />
         </Switch>
     )
 }

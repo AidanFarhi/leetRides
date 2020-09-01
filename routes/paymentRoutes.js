@@ -7,7 +7,6 @@ const reducer = (a, b) => a + b;
 const calculateOrderAmount = items => {
     const prices = items.map(car => car.price)
     const totalCost = prices.reduce(reducer)
-    console.log(totalCost)
     return totalCost
 }
 

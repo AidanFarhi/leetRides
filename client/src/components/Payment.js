@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import CardSection from './CardSection';
+import {Redirect} from 'react-router-dom'
 
 export default function Payment() {
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState('');
+    const [status, setSuccess] = useState({processed: false})
     const stripe = useStripe()
 
     const getItems = async() => {
@@ -24,7 +26,6 @@ export default function Payment() {
                 body: JSON.stringify({items: itemData})
             })
             const result = await response.json()
-            console.log('line 27 of Payment.js', result.clientSecret)
             setClientSecret(result.clientSecret)
         } catch(er) {console.log(er)}
     }
@@ -33,46 +34,51 @@ export default function Payment() {
         // We don't want to let default form submission happen here,
         // which would refresh the page.
         event.preventDefault();
-        
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
             // Make sure to disable form submission until Stripe.js has loaded.
             return;
         }
-        
         const result = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
-                    name: 'Jenny Rosen',
+                    name: localStorage.getItem('name'),
                 },
             }
-        });
-        
+        })
         if (result.error) {
             // Show error to your customer (e.g., insufficient funds)
-            console.log('line 54 Payment.js', result.error.message);
+            console.log(result.error.message);
         } else {
             // The payment has been processed!
             if (result.paymentIntent.status === 'succeeded') {
-                // Show a success message to your customer
-                // There's a risk of the customer closing the window before callback
-                // execution. Set up a webhook or plugin to listen for the
-                // payment_intent.succeeded event that handles any business critical
-                // post-payment actions.
+                const makeOrder = await fetch('/order', {
+                    method: 'POST',
+                    headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                    body: JSON.stringify({userId: Number(localStorage.getItem('id'))})
+                })
+                if (makeOrder.response === 'order-placed') {
+                    setSuccess({processed: true})
+                }
             }
         }
     }; 
     
     useEffect(()=> {
-        const items = getItems()
-        makePaymentIntent(items)
+        if (!status.processed) {
+            const items = getItems()
+            makePaymentIntent(items)
+        } 
      }, [])
 
     return (
+        status.processed ? 
+            <Redirect to="/"/>
+        :
         <form onSubmit={handleSubmit}>
         <CardSection />
         <button disabled={!stripe}>Confirm order</button>
-        </form>   
+        </form>  
     )
 }

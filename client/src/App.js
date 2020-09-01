@@ -5,7 +5,6 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 const key = require('./secrets')
 const promise = loadStripe(key);
-console.log('line 6 App.js', promise)
 
 function App() {
   return (

@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
-
 import CardSection from './CardSection';
 
 export default function Payment() {
-    const stripe = useStripe();
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState('');
+    const stripe = useStripe()
 
     const getItems = async() => {
         try {
@@ -15,6 +14,7 @@ export default function Payment() {
             return data
         } catch(er) {console.log(er)}
     }
+
     const makePaymentIntent = async(items) => {
         try {
             const itemData = await items
@@ -24,6 +24,7 @@ export default function Payment() {
                 body: JSON.stringify({items: itemData})
             })
             const result = await response.json()
+            console.log('line 27 of Payment.js', result.clientSecret)
             setClientSecret(result.clientSecret)
         } catch(er) {console.log(er)}
     }
@@ -50,7 +51,7 @@ export default function Payment() {
         
         if (result.error) {
             // Show error to your customer (e.g., insufficient funds)
-            console.log(result.error.message);
+            console.log('line 54 Payment.js', result.error.message);
         } else {
             // The payment has been processed!
             if (result.paymentIntent.status === 'succeeded') {

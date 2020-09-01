@@ -3,7 +3,6 @@ const { Router }  = require('express')
 const router = new Router()
 const stripe = require('stripe')(`${process.env.REACT_APP_STRIPE_API_KEY}`)
 
-
 const reducer = (a, b) => a + b;
 const calculateOrderAmount = items => {
     const prices = items.map(car => car.price)

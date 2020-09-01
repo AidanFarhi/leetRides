@@ -1,6 +1,5 @@
 const { Router }  = require('express')
 const {Cart, Users, Orders} = require('../models')
-// const Orders = require('../models/orders')
 const router = new Router()
 
 // make a post to orders model here
@@ -16,6 +15,7 @@ router.post('/', async(req, res, next) => {
             status: 'shipping',
             total: req.body.total
         })
+        await Cart.destroy({where: {userId: req.body.userId}})
         res.send({response: 'order-placed'})
     } catch(er) {next(er)}
 })

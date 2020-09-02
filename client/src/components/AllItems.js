@@ -20,7 +20,6 @@ export default function AllItems() {
                                 <Link id='title-link' key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
                                 <div className='description'>
                                     <p id='price'>Starting at ${car.price}.00</p>
-                                    {/* <p>{car.description}</p> */}
                                 </div>
                             </div>
                         )

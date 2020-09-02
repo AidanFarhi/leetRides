@@ -15,12 +15,13 @@ export default function AllItems() {
                 setState({
                     cars: data.map((car, i) => {
                         return(
-                            <div key={i}>
+                            <div className='car' key={i}>
                                 <img src={car.imageUrl} alt='a nice car'></img>
                                 <Link key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
-                                <h3>${car.price}.00</h3>
-                                <h3>{car.description}</h3>
-                                <hr></hr>
+                                <div className='description'>
+                                    <p id='price'>Starting at ${car.price}.00</p>
+                                    {/* <p>{car.description}</p> */}
+                                </div>
                             </div>
                         )
                     })
@@ -31,7 +32,7 @@ export default function AllItems() {
     },[])
 
     return (
-        <div>
+        <div className='cars-main-div'>
             {state.cars}
         </div>
     )

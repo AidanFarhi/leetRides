@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Register from './Register'
+import '../cmp-styles/Login.css'
 
 export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
@@ -26,7 +27,7 @@ export default function Login(props) {
             })
             const login = await response.json()
             if (login.result === 'login-succesful') {
-                props.methods[0](login.user)
+                props.method(login.user)
             }
         } catch(er) {console.log(er)}
     }
@@ -38,19 +39,18 @@ export default function Login(props) {
 
     return (
         <div id='login-form-div'>
-            <h1>Welcome</h1>
-            <form onSubmit={handleSubmit}>
-                <input type='text' name='username' placeholder='Username' value={username.username} onChange={handleUsername} required/>
-                <input type='password' name='password' placeholder='Password' value={password.password} onChange={handlePassword} required/>
-                <button type='submit'>Login</button>   
-            </form>
-            <hr></hr>
-            <button onClick={handleRegister}>Register</button>
-            {registering.registering ? <Register method={props.methods[0]}/> : null}
-            <h2>-------- or -------</h2>
-            <h2>Continue as guest</h2>
-            <button onClick={props.methods[1]}>Guest Login</button>
-            <hr></hr>
+            <div id='login-form-items'>
+                <h3 id='login-header'>Login/Register</h3>
+                <form onSubmit={handleSubmit}>
+                    <input type='text' name='username' placeholder='Username' value={username.username} onChange={handleUsername} required/>
+                    <br></br>
+                    <input type='password' name='password' placeholder='Password' value={password.password} onChange={handlePassword} required/>
+                    <br></br>
+                    <button type='submit'>Login</button>   
+                </form>
+                <button onClick={handleRegister}>create an account</button>
+                {registering.registering ? <Register method={props.method}/> : null}
+            </div>
         </div>
     )
 }

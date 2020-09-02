@@ -1,4 +1,4 @@
-import React, {setState, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 export default function OrderSummary(props) {
     const [state, setState] = useState({

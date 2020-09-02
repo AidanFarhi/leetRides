@@ -1,24 +1,27 @@
-import React, {useState} from 'react'
+
+import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import '../cmp-styles/NavBar.css'
 
 export default function NavBar(props) {
-    const [state, setState] = useState({
-        text: ''
-    })
+    const [text, setText] = useState('')
+    const [loggedIn, setStatus] = useState(false)
 
     const handleChange = (event) => {
-        setState({
-            text: event.target.value
-        })
+        setText(event.target.value)
+        console.log(text)
     }
+
     const search = (event) => {
         event.preventDefault()
-        console.log(state.text)
-        setState({
-            text: ''
-        })
+        console.log(text)
     }
+
+    useEffect(()=> {
+        if (localStorage.getItem('loggedIn') === 'true') {
+            setStatus(true)
+        }    
+    },[])
 
     return (
         <div className='nav-main-div'>
@@ -26,7 +29,7 @@ export default function NavBar(props) {
             <form id='search-form' onSubmit={search}>
                 <input id='search-input' type='text' 
                     placeholder='Find your ride..' 
-                    value={state.text}
+                    value={text}
                     onChange={handleChange}
                     />
                 <button id='search' type='submit'></button>
@@ -35,7 +38,11 @@ export default function NavBar(props) {
             <Link to='/cars' id='cars'></Link>
             <Link to='/drivers' id='drivers'></Link>
             <Link to='/cart' id='cart'></Link>
-            <button id='logout' onClick={props.method}>Logout</button>
+            {loggedIn ? 
+                <button id='logout' onClick={props.methods[1]}>logout</button>
+                :
+                <button id='login' onClick={props.methods[0]}>login</button>
+            }
             </div>
         </div>
     )

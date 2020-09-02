@@ -19,7 +19,6 @@ img {
     text-align: center;
     margin: 10px;
     width: 30%;
-    transition: background 250ms ease-in-out, transform 150ms ease;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
@@ -34,6 +33,7 @@ img {
     -webkit-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
     -moz-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
     box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
+    transition: all .3s ease;
 }
 
 .car>a {

@@ -3,4 +3,8 @@ body {
     background-color: #161616;
     color: whitesmoke;
     margin: 0;
+    background-image: url('./icons/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
 }

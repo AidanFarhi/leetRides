@@ -35,11 +35,12 @@ export default function SingleItem(props) {
         <div>
             <div className='single-car-div'>
                 <img id='car-image' src={state.carData.imageUrl} alt='a sweet ride'></img>
-                <h3>{state.carData.name}</h3>
-                <h3>${state.carData.price}.00</h3>
-                <h3>{state.carData.description}</h3>
-                <br></br>
-                <button onClick={addItem}>Add to cart</button>
+                <div id='single-car-description'>
+                    <h3>{state.carData.name}</h3>
+                    <h3>${state.carData.price}.00</h3>
+                    <p>{state.carData.description}</p>
+                    <button onClick={addItem}>Add to cart</button>
+                </div>
             </div>
         </div>
     )

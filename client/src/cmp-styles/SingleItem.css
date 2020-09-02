@@ -1,13 +1,26 @@
 .single-car-div {
     display: flex;
-    flex-direction: column;
-    padding-top: 10%;
+    flex-direction: row;
+    padding-top: 15%;
+    padding-left: 5%;
+    padding-right: 5%;
     align-items: center;
-    /* margin-right: 25%;
-    margin-left: 25%; */
 }
 
 #car-image {
     height: 400px;
     width: 500px;
 }
+
+#single-car-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    padding-bottom: 10%;
+}
+
+#single-car-description>p {
+    width: 70%;
+    padding-bottom: 3%;
+} 

@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
+import '../cmp-styles/NavBar.css'
+
 export default function NavBar(props) {
     const [state, setState] = useState({
         text: ''
@@ -20,25 +22,21 @@ export default function NavBar(props) {
 
     return (
         <div className='nav-main-div'>
-            <Link to='/'><h1>LeetRides</h1></Link>
+            <Link id='header-link' to='/'><h1>LeetRides</h1></Link>
             <form id='search-form' onSubmit={search}>
-                <input type='text' 
+                <input id='search-input' type='text' 
                     placeholder='Find your ride..' 
                     value={state.text}
                     onChange={handleChange}
                     />
-                <button type='submit'>Search</button>
+                <button id='search' type='submit'></button>
             </form>
             <div className='links-div'>
-                <Link to='/cars'>Cars</Link>
-                <Link to='/drivers'>Drivers</Link>
-                <Link to='/cart'>Cart</Link>
-                <Link to='/checkout'>Checkout</Link>
-                <button onClick={props.method}>Logout</button>
+            <Link to='/cars' id='cars'></Link>
+            <Link to='/drivers' id='drivers'></Link>
+            <Link to='/cart' id='cart'></Link>
+            <button id='logout' onClick={props.method}>Logout</button>
             </div>
-            <h1>
-                {state.text}
-            </h1>
         </div>
     )
 }

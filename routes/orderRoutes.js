@@ -32,12 +32,21 @@ router.post('/', async(req, res, next) => {
     } catch(er) {next(er)}
 })
 
-// this will get all the orders associated with the user
-router.get('/:id', async(req, res, next) => {
+// this will get the latest order made by a user
+router.get('/recent/:id', async(req, res, next) => {
     try {
         const response = await Orders.findOne({where: {userId: req.params.id},
             order: [['createdAt', 'DESC']]
         })
+        const data = await response
+        res.send(data)
+    } catch(er) {next(er)}
+})
+
+// gets all orders associated with an user
+router.get('/:id', async(req, res, next) => {
+    try {
+        const response = await Orders.findAll({where:{userId: req.params.id}})
         const data = await response
         res.send(data)
     } catch(er) {next(er)}

@@ -7,9 +7,8 @@ export default function OrderSummary(props) {
     useEffect(()=> {
         const getOrders = async() => {
             try {
-                const response = await fetch(`order/${props.location.state.id}`)
+                const response = await fetch(`order/recent/${props.location.state.id}`)
                 const orderData = await response.json()
-                console.log(orderData)
                 setState({
                     order: orderData
                 })

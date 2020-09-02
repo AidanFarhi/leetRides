@@ -1,7 +1,6 @@
 const { Router }  = require('express')
 const bcrypt = require('bcrypt')
-const Users = require('../models/user')
-const Cart = require('../models/userCart')
+const {Users, Orders} = require('../models')
 const router = new Router()
 
 // route to fetch all users
@@ -16,17 +15,15 @@ router.get('/', async(req, res, next) => {
 // route to fetch single user
 router.get('/:id', async(req, res, next) => {
     try {
-        const response = await Users.findAll({where: {id: req.params.id}, include: Cart})
+        const response = await Users.findAll({where: {id: req.params.id}, include: Orders})
         const user = await response
         res.send(user)
-        
     } catch(er) {next(er)}
 })
 
 // route to login user
 router.post('/login', async(req, res, next) => {
     try {
-        console.log(req.body)
         const {username, password} = req.body
         const user = await Users.findAll({where: {username: username}})
         if (user.length === 0) res.send({result: 'username-not-found'})

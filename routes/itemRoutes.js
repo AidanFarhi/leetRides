@@ -18,4 +18,13 @@ router.get('/:id', async(req, res, next) => {
     } catch(er) {next(er)}
 })
 
+// route for getting a range of items
+router.post('/', async(req, res, next) => {
+    console.log(req.body)
+    try {
+        const cars = await Items.findAll({where:{id: req.body.items}})
+        res.send(cars)
+    } catch(er) {next(er)}
+})
+
 module.exports = router

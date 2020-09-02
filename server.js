@@ -12,8 +12,7 @@ const models = require('./models')
 const PORT = 4000
 const init = async() => {
     try {
-        models.Orders.sync({force: true})
-        // models.db.sync()
+        models.db.sync()
         console.log('all models succesfully syncronized')
     } catch(er) { console.log(er) }
     app.listen(PORT, ()=> {
@@ -26,7 +25,7 @@ init()
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/cart', require('./routes/cartRoutes'))
-app.use('/order', require('./routes/orderRoute'))
+app.use('/order', require('./routes/orderRoutes'))
 app.use('/pay', require('./routes/paymentRoutes'))
 
 // Error catching endware

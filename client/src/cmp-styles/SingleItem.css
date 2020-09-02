@@ -1,0 +1,13 @@
+.single-car-div {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10%;
+    align-items: center;
+    /* margin-right: 25%;
+    margin-left: 25%; */
+}
+
+#car-image {
+    height: 400px;
+    width: 500px;
+}

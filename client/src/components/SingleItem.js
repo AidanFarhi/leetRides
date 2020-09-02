@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import '../cmp-styles/SingleItem.css'
 
 export default function SingleItem(props) {
     const [state, setState] = useState({
@@ -13,7 +14,6 @@ export default function SingleItem(props) {
                 body: JSON.stringify({userId: localStorage.getItem('id'), itemId: state.carData.id})
             })
             const result = await response.json()
-            console.log(result.response)
         } catch(er) {console.log(er)}
     }
 
@@ -22,6 +22,7 @@ export default function SingleItem(props) {
             try {
                 const response =  await fetch(`/items/${props.location.query.id}`)
                 const data = await response.json()
+                localStorage.setItem('carId', `${props.location.query.id}`)
                 setState({
                     carData: data[0]
                 })
@@ -32,14 +33,13 @@ export default function SingleItem(props) {
 
     return(
         <div>
-            <div className='car-div'>
-                <img src={state.carData.imageUrl} alt='a sweet ride'></img>
+            <div className='single-car-div'>
+                <img id='car-image' src={state.carData.imageUrl} alt='a sweet ride'></img>
                 <h3>{state.carData.name}</h3>
-                <h3>{state.carData.price}</h3>
+                <h3>${state.carData.price}.00</h3>
                 <h3>{state.carData.description}</h3>
                 <br></br>
                 <button onClick={addItem}>Add to cart</button>
-                <hr></hr>
             </div>
         </div>
     )

@@ -4,7 +4,6 @@
     margin-top: 10%;
     justify-content: center;
     flex-direction: row;
-
 }
 
 img {   
@@ -39,4 +38,5 @@ img {
 .car>a {
     text-decoration: none;
     color: whitesmoke;
+    opacity: 1;
 }

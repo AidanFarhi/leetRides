@@ -1,0 +1,55 @@
+const { Router }  = require('express')
+const {GuestCart, Guests, GuestOrders, Items} = require('../models')
+const router = new Router()
+
+const reducer = (a, b) => a + b;
+const calculateOrderAmount = async items => {
+    try {
+        const cars = await Items.findAll({where: {id: items}})
+        const prices = cars.map(car => car.price)
+        const totalCost = prices.reduce(reducer)
+        return totalCost
+    } catch(er) {console.log(er)}
+}
+
+// make a post to GuestOrders model here
+router.post('/', async(req, res, next) => {
+    try {
+        const response = await GuestCart.findAll({where: {guestId: req.body.guestId}, include: Guests})
+        const data = await response
+        const totalCost = await calculateOrderAmount(data[0].items)
+        await GuestOrders.create({
+            name: data[0].user.name,
+            address: data[0].user.address,
+            email: data[0].user.email,
+            items: data[0].items,
+            status: 'shipping',
+            total: totalCost,
+            guestId: data[0].user.id
+        })
+        await GuestCart.destroy({where: {guestId: req.body.guestId}})
+        res.send({response: 'order-placed'})
+    } catch(er) {next(er)}
+})
+
+// this will get the latest order made by a user
+router.get('/recent/:id', async(req, res, next) => {
+    try {
+        const response = await GuestOrders.findOne({where: {guestId: req.params.id},
+            order: [['createdAt', 'DESC']]
+        })
+        const data = await response
+        res.send(data)
+    } catch(er) {next(er)}
+})
+
+// gets all GuestOrders associated with an user
+router.get('/:id', async(req, res, next) => {
+    try {
+        const response = await GuestOrders.findAll({where:{guestId: req.params.id}})
+        const data = await response
+        res.send(data)
+    } catch(er) {next(er)}
+})
+
+module.exports = router

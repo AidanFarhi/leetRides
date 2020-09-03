@@ -6,7 +6,6 @@ import '../cmp-styles/NavBar.css'
 export default function NavBar(props) {
     const [text, setText] = useState('')
     const [loggedIn, setStatus] = useState(props.methods[2])
-    console.log('loggedIn:', loggedIn)
 
     const handleChange = (event) => {
         setText(event.target.value)
@@ -18,10 +17,13 @@ export default function NavBar(props) {
     }
 
     useEffect(()=> {
+        console.log(localStorage.getItem('loggedIn'))
         if (localStorage.getItem('loggedIn') === 'true') {
             setStatus(true)
+        } else {
+            setStatus(false)
         }    
-    },[])
+    })
 
     return (
         <div className='nav-main-div'>

@@ -51,7 +51,7 @@ export default function Home() {
         if (localStorage.getItem('loggedIn') === 'true') {
             setState({
                 loggedIn: true,
-                loggedIn: false,
+                loggingIn: false,
                 userName: localStorage.getItem('name'),
                 userId: localStorage.getItem('id')
             })

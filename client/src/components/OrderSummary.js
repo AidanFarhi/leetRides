@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import '../cmp-styles/OrderSummary.css'
 
 export default function OrderSummary(props) {
     const [state, setState] = useState({
@@ -18,11 +19,13 @@ export default function OrderSummary(props) {
     },[])
 
     return (
-        <div>
+        <div id='order-summary-main-div'>
+            
             <h2>Customer Name: {state.order.name}</h2>
             <h2>Total: ${state.order.total}.00</h2>
             <h2>Shipping To: {state.order.address}</h2>
             <h2>Estimated Arrival: 5-7 business days</h2>
+            
         </div>
     )
 }

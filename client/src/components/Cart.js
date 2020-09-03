@@ -26,6 +26,11 @@ export default function Cart() {
             const data = await response.json()
             const prices = data.map(car => car.price)
             const reducer = (a, b) => a + b
+            if (prices.length === 0) {
+                setState({
+                    total: 0
+                })
+            }
             const totalCost = prices.reduce(reducer)
             setState({
                 cars: data.map((car, i) => {
@@ -49,12 +54,15 @@ export default function Cart() {
 
     return (
         <div id='cart-main-div'>
-            <h1 id='cart-header'>Your Cart</h1>
+            <h1 id='cart-header'>{state.total === 0 ? 'Cart Empty' : 'Your Cart'}</h1>
             {state.cars}
+            {state.total === 0 ? null : 
             <div id='total-div'>
                 <h3 id='total-header'>Total:</h3><p>${state.total}.00</p>
             </div>
-            <Link id='checkout-link' to='/checkout'>Checkout</Link>
+            }
+            {state.total === 0 ? null : <Link id='checkout-link' to='/checkout'>Checkout</Link>}
+            
         </div>
     )
 }

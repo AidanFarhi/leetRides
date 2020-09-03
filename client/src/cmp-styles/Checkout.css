@@ -1,0 +1,36 @@
+#checkout-header {
+    width: 30%;
+    border-bottom: 1px solid whitesmoke;
+    padding-bottom: 2%;
+}
+
+#main-checkout-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#main-checkout-div>a {
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: #161616;
+    margin-top: 3%;
+    width: 20%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    vertical-align: auto;
+    opacity: 1;
+}
+
+#main-checkout-div>a:hover{
+    transition: all .2s ease;
+    -webkit-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
+    -moz-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
+    box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
+}

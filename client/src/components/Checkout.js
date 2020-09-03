@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import '../cmp-styles/Checkout.css'
 
 export default function Checkout() {
     const [state, setState] = useState({
@@ -13,7 +14,7 @@ export default function Checkout() {
                try {
                     const response = await fetch(`cart/${localStorage.getItem('id')}`)
                     const data = await response.json()
-                    const listItems = data.map((car, i) => <li key={i}>{car.name} - {car.price}</li>)
+                    const listItems = data.map((car, i) => <li key={i}>{car.name} - ${car.price}.00</li>)
                     const prices = data.map(car => car.price)
                     const reducer = (a, b) => a + b;
                     const totalCost = prices.reduce(reducer)
@@ -28,8 +29,8 @@ export default function Checkout() {
     }, [])
 
     return (
-        <div>
-            <h1>Checkout</h1>
+        <div id='main-checkout-div'>
+            <h1 id='checkout-header'>Checkout</h1>
             <ul>
                 {state.cartListItems}
             </ul>

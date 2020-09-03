@@ -97,6 +97,7 @@ export default function Cart() {
             getData()
             return
         } else if (localStorage.getItem('guestId') === null) {
+            getData()
             return
         } else {
             getDataGuest()

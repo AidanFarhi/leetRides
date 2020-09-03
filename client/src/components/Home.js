@@ -25,6 +25,7 @@ export default function Home() {
         localStorage.setItem('loggedIn', 'true')
         localStorage.setItem('name', user.name)
         localStorage.setItem('id', user.id)
+        localStorage.removeItem('guestId')
         setState({
             loggingIn: false,
             loggedIn: true,

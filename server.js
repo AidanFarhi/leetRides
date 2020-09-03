@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const models = require('./models')
 require('dotenv').config()
 
 const app = express()
@@ -8,12 +9,15 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-const models = require('./models')
+// const models = require('./models')
 const PORT = 4000
 const init = async() => {
     try {
-        models.db.sync()
-        console.log('all models succesfully syncronized')
+        // models.Guests.sync({force: true})
+        // models.GuestCart.sync()
+        // models.GuestOrders.sync()
+        // models.db.sync()
+        console.log('nothing to opdate')
     } catch(er) { console.log(er) }
     app.listen(PORT, ()=> {
         console.log(`Server live on port: ${PORT}`)
@@ -27,6 +31,9 @@ app.use('/users', require('./routes/userRoutes'))
 app.use('/cart', require('./routes/cartRoutes'))
 app.use('/order', require('./routes/orderRoutes'))
 app.use('/pay', require('./routes/paymentRoutes'))
+app.use('/guestCart', require('./routes/guestCartRoutes'))
+app.use('/guestOrder', require('./routes/guestOrderRoutes'))
+app.use('/guest', require('./routes/guestRoutes'))
 
 // Error catching endware
 app.use((err, req, res, next) => {

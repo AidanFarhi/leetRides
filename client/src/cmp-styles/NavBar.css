@@ -59,6 +59,10 @@ h1 {
     margin-left: 3%;
 }
 
+#search:hover {
+    opacity: .3;
+}
+
 #logout, #login {
     border: none;
     -webkit-appearance: none;

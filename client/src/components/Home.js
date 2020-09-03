@@ -58,12 +58,12 @@ export default function Home() {
     },[])
 
     // these get passed to the navbar component
-    const methods = [startLogin, logout]
+    const methods = [startLogin, logout, state.loggedIn]
 
     return(
         <div id='home-main-div'>
             <NavBar methods={methods}/>
-            {state.loggingIn ? <Login method={login} />: null}
+            {state.loggingIn ? <Login status={state.loggedIn} method={login} />: null}
             <Routes />
         </div>
     )

@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import '../cmp-styles/Cart.css'
 
 export default function Cart() {
     const [state, setState] = useState({
-        cars: []
+        cars: [],
+        total: 0
     })
 
     const removeItem = async(id) => {
@@ -22,19 +24,21 @@ export default function Cart() {
         try {
             const response = await fetch(`cart/${localStorage.getItem('id')}`)
             const data = await response.json()
+            const prices = data.map(car => car.price)
+            const reducer = (a, b) => a + b
+            const totalCost = prices.reduce(reducer)
             setState({
                 cars: data.map((car, i) => {
                     return(
-                        <div key={i}>
+                        <div className='cart-item' key={i}>
                             <img src={car.imageUrl} alt='a nice car'></img>
                             <Link key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
-                            <h3>${car.price}.00</h3>
-                            <h3>{car.description}</h3>
+                            <p>${car.price}.00</p>
                             <button onClick={()=> removeItem(car.id)}>Delete</button>
-                            <hr></hr>
                         </div>
                     )
-                })
+                }),
+                total: totalCost
             })
         } catch(er) {console.log(er)}
     }
@@ -44,9 +48,13 @@ export default function Cart() {
     },[])
 
     return (
-        <div>
-            <h1>Your Cart</h1>
+        <div id='cart-main-div'>
+            <h1 id='cart-header'>Your Cart</h1>
             {state.cars}
+            <div id='total-div'>
+                <h3 id='total-header'>Total:</h3><p>${state.total}.00</p>
+            </div>
+            <Link id='checkout-link' to='/checkout'>Checkout</Link>
         </div>
     )
 }

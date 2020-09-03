@@ -24,6 +24,15 @@
     transition: all .3s ease;
 }
 
+#recent-order-car-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 60%;
+    justify-items: center;
+    justify-content: space-evenly;
+}
+
 #recent-order-car-links>a:hover {
     opacity: 1;
 }

@@ -15,6 +15,10 @@ ul {
     list-style-type: none;
 }
 
+li {
+    padding-bottom: 5px;
+}
+
 #main-checkout-div>a {
     text-decoration: none;
     color: whitesmoke;

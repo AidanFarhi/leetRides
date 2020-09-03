@@ -20,12 +20,11 @@ export default function OrderSummary(props) {
 
     return (
         <div id='order-summary-main-div'>
-            
+            <h1>Order Placed!</h1>
             <h2>Customer Name: {state.order.name}</h2>
-            <h2>Total: ${state.order.total}.00</h2>
+            <h2>Total: ${state.order.total}00.00</h2>
             <h2>Shipping To: {state.order.address}</h2>
             <h2>Estimated Arrival: 5-7 business days</h2>
-            
         </div>
     )
 }

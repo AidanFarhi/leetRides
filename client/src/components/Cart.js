@@ -8,7 +8,23 @@ export default function Cart() {
         total: 0,
     })
 
+    const removeItemGuest = async(id) => {
+        try {
+            const response = await fetch('guestCart/remove', {
+                method: 'POST',
+                headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                body: JSON.stringify({id: localStorage.getItem('guestId'), itemId: id})
+            })
+            const result = await response.json()
+            if (result.response === 'item-deleted-guest') getDataGuest()
+        } catch(er) {console.log(er)}
+    }
+
     const removeItem = async(id) => {
+        if (localStorage.getItem('id') === null) {
+            removeItemGuest(id)
+            return
+        }
         try {
             const response = await fetch('cart/remove', {
                 method: 'POST',

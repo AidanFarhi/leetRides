@@ -39,6 +39,7 @@ export default function Register(props) {
 
     return (
         <div id='register-form-div'>
+            <div id='register-form-div-items'>
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Full Name' value={name.name} onChange={handleName} required/>
                 <br></br>
@@ -54,6 +55,7 @@ export default function Register(props) {
                 <br></br>
                 <button type='submit'>Create</button>   
             </form>
+            </div>
         </div>
     )
 }

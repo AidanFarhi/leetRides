@@ -46,7 +46,7 @@ export default function Login(props) {
                     <br></br>
                     <input type='password' name='password' placeholder='Password' value={password.password} onChange={handlePassword} required/>
                     <br></br>
-                    <button type='submit'>Login</button>   
+                    <button id='submit-button' type='submit'>Login</button>   
                 </form>
                 <button onClick={handleRegister}>create an account</button>
                 {registering.registering ? <Register method={props.method}/> : null}

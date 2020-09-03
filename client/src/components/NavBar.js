@@ -5,13 +5,13 @@ import '../cmp-styles/NavBar.css'
 
 export default function NavBar(props) {
     const [text, setText] = useState('')
-    const [loggedIn, setStatus] = useState(false)
+    const [loggedIn, setStatus] = useState(props.methods[2])
+    console.log('loggedIn:', loggedIn)
 
     const handleChange = (event) => {
         setText(event.target.value)
         console.log(text)
     }
-
     const search = (event) => {
         event.preventDefault()
         console.log(text)

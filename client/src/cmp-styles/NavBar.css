@@ -59,7 +59,7 @@ h1 {
     margin-left: 3%;
 }
 
-#logout {
+#logout, #login {
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -68,6 +68,12 @@ h1 {
     background: transparent;
     color: white;
     margin-bottom: 10%;
+}
+
+
+#logout:hover, #login:hover {
+    color: grey;
+    transition: all .15s ease;
 }
 
 /* Icons on the right */

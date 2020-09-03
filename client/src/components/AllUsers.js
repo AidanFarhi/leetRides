@@ -34,7 +34,6 @@ export default function AllUsers() {
 
     return (
         <div id='user-main-div'>
-            <h1 id='users-header'>Drivers</h1>
             {state.users}
         </div>
     )

@@ -18,10 +18,11 @@ export default function AllUsers() {
                         return(
                             <div key={i} className='user-div'>
                                 <img src={user.imageUrl} alt='an user icon'></img>
-                                <Link key={i} to={{pathname:'/driver', query:{id: user.id.toString()}}}><h3>{user.name}</h3></Link>
-                                <h3>{user.address}</h3>
-                                <h3>{user.email}</h3>
-                                <hr></hr>
+                                <div className='user-data'>
+                                    <Link key={i} to={{pathname:'/driver', query:{id: user.id.toString()}}}><h3>{user.username}</h3></Link>
+                                    <p>{user.address}</p>
+                                    <p>{user.email}</p>
+                                </div>
                             </div>
                         )
                     })
@@ -32,7 +33,8 @@ export default function AllUsers() {
     },[])
 
     return (
-        <div>
+        <div id='user-main-div'>
+            <h1 id='users-header'>Drivers</h1>
             {state.users}
         </div>
     )

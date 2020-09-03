@@ -1,6 +1,44 @@
+#user-main-div {
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#users-header {
+    position: fixed;
+    left: 47%;
+}
+
+.user-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    padding-bottom: 3%;
+    width: 50%;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.user-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .user-div>img {
     height: 200px;
     width: 200px;
     border-radius: 50%;
-    background-color: white;
+}
+
+.user-data>a {
+    text-decoration: none;
+    color: whitesmoke;
+    opacity: 1;
+}
+
+.user-data>a:hover {
+    color: grey;
+    transition: all .3s ease;
 }

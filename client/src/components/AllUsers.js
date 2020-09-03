@@ -20,8 +20,6 @@ export default function AllUsers() {
                                 <img src={user.imageUrl} alt='an user icon'></img>
                                 <div className='user-data'>
                                     <Link key={i} to={{pathname:'/driver', query:{id: user.id.toString()}}}><h3>{user.username}</h3></Link>
-                                    <p>{user.address}</p>
-                                    <p>{user.email}</p>
                                 </div>
                             </div>
                         )

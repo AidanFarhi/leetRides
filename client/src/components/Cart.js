@@ -5,7 +5,7 @@ import '../cmp-styles/Cart.css'
 export default function Cart() {
     const [state, setState] = useState({
         cars: [],
-        total: 0
+        total: 0,
     })
 
     const removeItem = async(id) => {
@@ -17,6 +17,34 @@ export default function Cart() {
             })
             const result = await response.json()
             if (result.response === 'item-deleted') getData()
+        } catch(er) {console.log(er)}
+    }
+
+    const getDataGuest = async() => {
+        try {
+            const response = await fetch(`guestCart/${localStorage.getItem('guestId')}`)
+            const data = await response.json()
+            const prices = data.map(car => car.price)
+            const reducer = (a, b) => a + b
+            if (prices.length === 0) {
+                setState({
+                    total: 0
+                })
+            }
+            const totalCost = prices.reduce(reducer)
+            setState({
+                cars: data.map((car, i) => {
+                    return(
+                        <div className='cart-item' key={i}>
+                            <img src={car.imageUrl} alt='a nice car'></img>
+                            <Link key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
+                            <p>${car.price}.00</p>
+                            <button onClick={()=> removeItem(car.id)}>Delete</button>
+                        </div>
+                    )
+                }),
+                total: totalCost
+            })
         } catch(er) {console.log(er)}
     }
 
@@ -49,7 +77,15 @@ export default function Cart() {
     }
     
     useEffect(()=> {
-        getData()
+        if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
+            getData()
+            return
+        } else if (localStorage.getItem('guestId') === null) {
+            return
+        } else {
+            getDataGuest()
+            return
+        }
     },[])
 
     return (

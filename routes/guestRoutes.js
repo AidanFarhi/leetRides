@@ -11,6 +11,17 @@ router.post('/register', async(req, res, next) => {
             email: 'undefined@gmail.com'
         })
         res.send({response: 'guest-created', newGuest: newGuest})
+    } catch(er) {res.send(er)}
+})
+
+router.post('/update', async(req, res, next) => {
+    try {
+        await Guests.update({
+            name: req.body.name,
+            address: req.body.address,
+            email: req.body.email
+        }, {where: {id: req.body.id}})
+        res.send({response: 'guest-updated'})
     } catch(er) {next(er)}
 })
 

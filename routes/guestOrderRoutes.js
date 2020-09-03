@@ -18,14 +18,15 @@ router.post('/', async(req, res, next) => {
         const response = await GuestCart.findAll({where: {guestId: req.body.guestId}, include: Guests})
         const data = await response
         const totalCost = await calculateOrderAmount(data[0].items)
+        console.log(data[0].guest.dataValues)
         await GuestOrders.create({
-            name: data[0].user.name,
-            address: data[0].user.address,
-            email: data[0].user.email,
-            items: data[0].items,
+            name: data[0].guest.dataValues.name,
+            address: data[0].guest.dataValues.address,
+            email: data[0].guest.dataValues.email,
+            items: data[0].dataValues.items,
             status: 'shipping',
             total: totalCost,
-            guestId: data[0].user.id
+            guestId: data[0].guest.dataValues.id
         })
         await GuestCart.destroy({where: {guestId: req.body.guestId}})
         res.send({response: 'order-placed'})

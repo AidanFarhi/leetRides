@@ -5,16 +5,26 @@ export default function OrderSummary(props) {
     const [state, setState] = useState({
         order: []
     })
-    useEffect(()=> {
-        const getOrders = async() => {
-            try {
-                const response = await fetch(`order/recent/${props.location.state.id}`)
-                const orderData = await response.json()
-                setState({
-                    order: orderData
-                })
-            } catch(er) {console.log(er)}
+
+    const getOrders = async() => {
+        let orderRoute = ''
+        let id = ''
+        if (localStorage.getItem('id') === null) {
+            id = localStorage.getItem('guestId')
+            orderRoute = 'guestOrder'
+        } else {
+            id = localStorage.getItem('id')
+            orderRoute = 'order'
         }
+        try {
+            const response = await fetch(`${orderRoute}/recent/${id}`)
+            const orderData = await response.json()
+            setState({
+                order: orderData
+            })
+        } catch(er) {console.log(er)}
+    }
+    useEffect(()=> {
         getOrders()
     },[])
 

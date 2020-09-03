@@ -23,7 +23,8 @@ const CARD_ELEMENT_OPTIONS = {
 function CardSection() {
   return (
     <label>
-      Card details
+      <h1 id='payment-header'>Enter Card Details</h1>
+      <p id='test-card'>Test Card: 4242 4242 4242 4242 - 04/24 - 224 - 11223</p>
       <CardElement options={CARD_ELEMENT_OPTIONS} />
     </label>
   );

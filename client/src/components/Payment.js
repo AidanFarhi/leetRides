@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react'
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import CardSection from './CardSection';
 import {Redirect} from 'react-router-dom'
+import '../cmp-styles/Payment.css'
 
 export default function Payment() {
     const elements = useElements();
+    const [error, setError] = useState(null)
     const [clientSecret, setClientSecret] = useState('');
     const [status, setSuccess] = useState({processed: false})
     const stripe = useStripe()
@@ -49,6 +51,7 @@ export default function Payment() {
         })
         if (result.error) {
             // Show error to your customer (e.g., insufficient funds)
+            setError(result.error.message)
             console.log(result.error.message);
         } else {
             // The payment has been processed!
@@ -77,9 +80,10 @@ export default function Payment() {
         status.processed ? 
             <Redirect to={{pathname: "/summary", state: {id: localStorage.getItem('id')} }}/>
         :
-        <form onSubmit={handleSubmit}>
-        <CardSection />
-        <button disabled={!stripe}>Confirm order</button>
+        <form id='payment-form' onSubmit={handleSubmit}>
+            <h3>{error}</h3>
+            <CardSection />
+            <button disabled={!stripe}>Make Payment</button>
         </form>  
     )
 }

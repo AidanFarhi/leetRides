@@ -16,6 +16,7 @@ export default function NavBar(props) {
             const response = await fetch(`items/find/${text}`)
             const data = await response.json()
             props.methods[3](data)
+            setText('')
         } catch(er) {console.log(er)}
     }
 

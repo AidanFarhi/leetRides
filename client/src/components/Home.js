@@ -57,6 +57,10 @@ export default function Home() {
             redirecting: true,
             result: searchResult
         })
+        setRedirect({
+            redirecting: false,
+        })
+        console.log('resest')
     }
 
     useEffect(()=> {

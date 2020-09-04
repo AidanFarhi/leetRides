@@ -26,6 +26,7 @@ export default function Results(props) {
             localStorage.setItem('searchCars', JSON.stringify(props.location.result.items))
         }
         makeDivs()
+        return function cleanup() {localStorage.removeItem('searchCars')}
     },[])
 
     return (

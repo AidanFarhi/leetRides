@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import '../cmp-styles/Register.css'
 
 export default function Register(props) {
     const [name, setName] = useState({name: ''})
@@ -40,6 +41,7 @@ export default function Register(props) {
     return (
         <div id='register-form-div'>
             <div id='register-form-div-items'>
+            <h3 id='register-header'>Create an Account</h3>    
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Full Name' value={name.name} onChange={handleName} required/>
                 <br></br>

@@ -6,8 +6,6 @@ export default function Results() {
     const [itemDivs, setItemDivs] = useState([])
     const {query} = useParams()
 
-    console.log('this is the query', query)
-
     const getData = async() => {
         try {
             const response = await fetch(`find/${query}`)

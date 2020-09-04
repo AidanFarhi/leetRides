@@ -3,10 +3,9 @@ import React, {useState, useEffect} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import '../cmp-styles/NavBar.css'
 
-export default function NavBar(props) {
-    console.log('rendered')
+export default function NavBar() {
     const [text, setText] = useState('')
-    const [loggedIn, setStatus] = useState(props.methods[2])
+    const [loggedIn, setLoginStatus] = useState(false)
     const [renderResults, setRender] = useState(false)
 
     const handleChange = (event) => {
@@ -20,11 +19,14 @@ export default function NavBar(props) {
         setRender(true)
     }
 
+    const logout = () => {
+        localStorage.setItem('loggedIn', 'false')
+        setLoginStatus(false)
+    }
+
     useEffect(()=> {
         if (localStorage.getItem('loggedIn') === 'true') {
-            setStatus(true)
-        } else {
-            setStatus(false)
+            setLoginStatus(true)
         }    
     },[])
 
@@ -44,9 +46,9 @@ export default function NavBar(props) {
             <Link to='/drivers' id='drivers'></Link>
             <Link to='/cart' id='cart'></Link>
             {loggedIn ? 
-                <button id='logout' onClick={props.methods[1]}>logout</button>
+                <button id='logout' onClick={logout}>logout</button> 
                 :
-                <button id='login' onClick={props.methods[0]}>login</button>
+                <Link id='login' to='/login'>login</Link>
             }
             {renderResults ? <Redirect to={`/search/${text}`} /> : null}
             </div>

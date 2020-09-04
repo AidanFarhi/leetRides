@@ -1,8 +1,8 @@
-#login-form-div {
+#register-form-div {
     position: fixed;
     z-index: 1;
     width:45%;
-    height: 25%;
+    height: 50%;
     left: 27%;
     top: 25%;
     padding-bottom: 4%;
@@ -16,19 +16,19 @@
     opacity: .99;
 }
 
-#login-form-items, #login-form-items>form {
+#register-form-div-items, #register-form-div-items>form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
 
-#login-form-items>form>input {
+#register-form-div-items>form>input {
     width: 200%;
     height: 30px;
 }
 
-#login-form-items>button {
+#register-form-div-items>button {
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -39,7 +39,7 @@
     margin-bottom: 3%;
 }
 
-#login-form-items>button:hover {
+#register-form-div-items>button:hover {
     color: grey;
     transition: all .15s ease;
 }

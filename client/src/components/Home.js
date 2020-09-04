@@ -20,7 +20,6 @@ export default function Home() {
             userId: null
         })
     }
-
     const login = (user) => {
         localStorage.setItem('loggedIn', 'true')
         localStorage.setItem('name', user.name)
@@ -33,7 +32,6 @@ export default function Home() {
             userId: user.id
         })
     }
-
     const logout = () => {
         console.log('logged out')
         localStorage.removeItem('loggedIn')
@@ -60,7 +58,6 @@ export default function Home() {
 
     // these get passed to the navbar component
     const methods = [startLogin, logout, state.loggedIn]
-
     return(
         <div id='home-main-div'>
             <NavBar methods={methods}/>

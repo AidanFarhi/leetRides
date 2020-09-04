@@ -1,5 +1,7 @@
 const { Router }  = require('express')
 const Items = require('../models/items')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 const router = new Router()
 
 // route for all items
@@ -24,6 +26,20 @@ router.post('/', async(req, res, next) => {
         const cars = await Items.findAll({where:{id: req.body.items}})
         res.send(cars)
     } catch(er) {next(er)}
+})
+
+// route for searching for items by name
+router.get('/find/:query', async(req, res, next) => {
+    try {
+        const foundCars = await Items.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: '%' + req.params.query + '%'
+                }
+            }
+        })
+        res.send(foundCars)
+    } catch(er) {res.send(er)}
 })
 
 module.exports = router

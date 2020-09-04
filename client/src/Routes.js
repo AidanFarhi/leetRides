@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import {Home, AllItems, AllUsers, Cart, SingleUser, SingleItem, Checkout, Payment, OrderSummary, Login} from './components'
+import {Home, AllItems, AllUsers, Cart, SingleUser, SingleItem, Checkout, Payment, OrderSummary, Login, Results} from './components'
 
 export default function Routes() {
     return (
@@ -15,6 +15,7 @@ export default function Routes() {
             <Route path='/pay' component={Payment} />
             <Route path='/summary' component={OrderSummary} />
             <Route path='/login' component={Login} />
+            <Route path='/search/:query' children={<Results/>} />
         </Switch>
     )
 }

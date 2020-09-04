@@ -6,7 +6,10 @@ export default function Results(props) {
     const [items] = useState(JSON.parse(localStorage.getItem('searchCars')) || props.location.result.items)
     const [itemDivs, setItemDivs] = useState([])
 
+    console.log('items in results.js:', items.length)
+
     const makeDivs = () => {
+        console.log('made new divs')
         const divs = items.map((car, i) => {
             return (
                 <div key={i} className='car'>
@@ -22,11 +25,13 @@ export default function Results(props) {
     }
     
     useEffect(()=> {
-        if (localStorage.getItem('searchCars') === null) {
+        if (localStorage.getItem('searchCars') === null) {  
             localStorage.setItem('searchCars', JSON.stringify(props.location.result.items))
         }
         makeDivs()
-        return function cleanup() {localStorage.removeItem('searchCars')}
+        return function cleanup() {
+            localStorage.removeItem('searchCars')
+        }
     },[])
 
     return (

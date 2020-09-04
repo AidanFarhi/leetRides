@@ -13,11 +13,7 @@ app.use(express.urlencoded({extended: true}))
 const PORT = 4000
 const init = async() => {
     try {
-        // models.Guests.sync({force: true})
-        // models.GuestCart.sync()
-        // models.GuestOrders.sync()
-        // models.db.sync()
-        console.log('nothing to opdate')
+        console.log('nothing to update')
     } catch(er) { console.log(er) }
     app.listen(PORT, ()=> {
         console.log(`Server live on port: ${PORT}`)

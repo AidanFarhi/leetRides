@@ -25,7 +25,6 @@ export default function Home() {
             userId: null
         })
     }
-
     const login = (user) => {
         localStorage.setItem('loggedIn', 'true')
         localStorage.setItem('name', user.name)
@@ -38,7 +37,6 @@ export default function Home() {
             userId: user.id
         })
     }
-
     const logout = () => {
         console.log('logged out')
         localStorage.removeItem('loggedIn')
@@ -51,16 +49,16 @@ export default function Home() {
             userId: null
         })
     }
-
     const searchRedirect = (searchResult) => {
+        console.log(searchResult)
         setRedirect({
             redirecting: true,
             result: searchResult
         })
         setRedirect({
-            redirecting: false,
+            redirecting: false
         })
-        console.log('resest')
+        
     }
 
     useEffect(()=> {
@@ -76,12 +74,16 @@ export default function Home() {
 
     // these get passed to the navbar component
     const methods = [startLogin, logout, state.loggedIn, searchRedirect]
-
     return(
         <div id='home-main-div'>
             <NavBar methods={methods}/>
             {state.loggingIn ? <Login status={state.loggedIn} method={login} />: null}
-            {redirect.redirecting ? <Redirect  to={{ pathname:'/result', result: {items: redirect.result}}}/> : null}
+            {redirect.redirecting ? 
+            <Redirect to={{ pathname:'/result', 
+            result: {
+                items: redirect.result
+                }
+            }}/> : null}
             <Routes />
         </div>
     )

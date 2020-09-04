@@ -4,7 +4,6 @@ import '../cmp-styles/SingleItem.css'
 export default function SingleItem(props) {
     const [state, setState] = useState({
         carData: {},
-        id: localStorage.getItem('carId')
     })
 
     // check local storage to see if guest is logged in or not
@@ -76,6 +75,7 @@ export default function SingleItem(props) {
 
     useEffect(()=> {
         getData()
+        return function cleanup() {localStorage.removeItem('carId')}
     },[])
 
     return(

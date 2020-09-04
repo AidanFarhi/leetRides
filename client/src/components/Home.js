@@ -3,7 +3,6 @@ import '../cmp-styles/Home.css'
 import '../cmp-styles/NavBar.css'
 import {Login, NavBar} from '../components'
 import Routes from '../Routes'
-import {Redirect} from 'react-router-dom'
 
 export default function Home() {
     const [state, setState] = useState({
@@ -11,10 +10,6 @@ export default function Home() {
         loggedIn: false,
         userName: '',
         userId: null
-    })
-    const [redirect, setRedirect] = useState({
-        redirecting: false,
-        result: []
     })
 
     const startLogin = () => {
@@ -49,17 +44,6 @@ export default function Home() {
             userId: null
         })
     }
-    const searchRedirect = (searchResult) => {
-        console.log(searchResult)
-        setRedirect({
-            redirecting: true,
-            result: searchResult
-        })
-        setRedirect({
-            redirecting: false
-        })
-        
-    }
 
     useEffect(()=> {
         if (localStorage.getItem('loggedIn') === 'true') {
@@ -73,17 +57,11 @@ export default function Home() {
     },[])
 
     // these get passed to the navbar component
-    const methods = [startLogin, logout, state.loggedIn, searchRedirect]
+    const methods = [startLogin, logout, state.loggedIn]
     return(
         <div id='home-main-div'>
             <NavBar methods={methods}/>
             {state.loggingIn ? <Login status={state.loggedIn} method={login} />: null}
-            {redirect.redirecting ? 
-            <Redirect to={{ pathname:'/result', 
-            result: {
-                items: redirect.result
-                }
-            }}/> : null}
             <Routes />
         </div>
     )

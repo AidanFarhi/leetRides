@@ -1,23 +1,23 @@
 
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import '../cmp-styles/NavBar.css'
 
 export default function NavBar(props) {
+    console.log('rendered')
     const [text, setText] = useState('')
     const [loggedIn, setStatus] = useState(props.methods[2])
+    const [renderResults, setRender] = useState(false)
 
     const handleChange = (event) => {
         setText(event.target.value)
+        event.preventDefault()
     }
     const search = async (event) => {
-        event.preventDefault()
-        try {
-            const response = await fetch(`items/find/${text}`)
-            const data = await response.json()
-            props.methods[3](data)
-            setText('')
-        } catch(er) {console.log(er)}
+        triggerRender()
+    }
+    const triggerRender = () => {
+        setRender(true)
     }
 
     useEffect(()=> {
@@ -26,7 +26,7 @@ export default function NavBar(props) {
         } else {
             setStatus(false)
         }    
-    })
+    },[])
 
     return (
         <div className='nav-main-div'>
@@ -48,6 +48,7 @@ export default function NavBar(props) {
                 :
                 <button id='login' onClick={props.methods[0]}>login</button>
             }
+            {renderResults ? <Redirect to={`/search/${text}`} /> : null}
             </div>
         </div>
     )

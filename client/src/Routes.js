@@ -15,7 +15,7 @@ export default function Routes() {
             <Route path='/pay' component={Payment} />
             <Route path='/summary' component={OrderSummary} />
             <Route path='/login' component={Login} />
-            <Route path='/result' component={Results} />
+            <Route path='/search/:query' children={<Results/>} />
         </Switch>
     )
 }

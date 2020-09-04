@@ -1,37 +1,35 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'   
+import {Link, useParams} from 'react-router-dom'   
 import '../cmp-styles/AllItems.css'
 
-export default function Results(props) {
-    const [items] = useState(JSON.parse(localStorage.getItem('searchCars')) || props.location.result.items)
+export default function Results() {
     const [itemDivs, setItemDivs] = useState([])
+    const {query} = useParams()
 
-    console.log('items in results.js:', items.length)
+    console.log('this is the query', query)
 
-    const makeDivs = () => {
-        console.log('made new divs')
-        const divs = items.map((car, i) => {
-            return (
-                <div key={i} className='car'>
-                    <Link to={{pathname:'/car', query:{id: car.id.toString()}}}><img src={car.imageUrl} alt='a nice car'></img></Link>
-                    <Link id='title-link'to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
-                    <div className='description'>
-                    <p id='price'>Starting at ${car.price}.00</p>
+    const getData = async() => {
+        try {
+            const response = await fetch(`find/${query}`)
+            const data = await response.json()
+            console.log(data)
+            const divs = data.map((car, i) => {
+                return (
+                    <div key={i} className='car'>
+                        <Link to={{pathname:'/car', query:{id: car.id.toString()}}}><img src={car.imageUrl} alt='a nice car'></img></Link>
+                        <Link id='title-link'to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
+                        <div className='description'>
+                        <p id='price'>Starting at ${car.price}.00</p>
+                        </div>
                     </div>
-                </div>
-            )
-        })
-        setItemDivs(divs)
+                )
+            })
+            setItemDivs(divs)
+        } catch(er) {console.log(er)}
     }
     
     useEffect(()=> {
-        if (localStorage.getItem('searchCars') === null) {  
-            localStorage.setItem('searchCars', JSON.stringify(props.location.result.items))
-        }
-        makeDivs()
-        return function cleanup() {
-            localStorage.removeItem('searchCars')
-        }
+        getData()
     },[])
 
     return (

@@ -22,6 +22,7 @@ const init = async() => {
 
 init()
 
+app.use('/search', require('./routes/itemRoutes'))
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/cart', require('./routes/cartRoutes'))

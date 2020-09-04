@@ -58,27 +58,23 @@ export default function SingleItem(props) {
         } catch(er) {console.log(er)}
     }
     const getData = async() => {
+        let id = ''
+        if (localStorage.getItem('carId') === null) {
+            id = props.location.query.id
+        } else {
+            id = localStorage.getItem('carId')
+        }
         try {
-            const response =  await fetch(`/items/${props.location.query.id}`)
+            const response =  await fetch(`/items/${id}`)
             const data = await response.json()
-            localStorage.setItem('carId', `${props.location.query.id}`)
+            localStorage.setItem('carId', `${id}`)
             setState({
                 carData: data[0]
             })
         } catch(er) {console.log(er)}
     }
-    // getDataRefresh = async() => {
-    //     try {
-    //         const response =  await fetch(`/items/${state.id}`)
-    //         const data = await response.json()
-    //         setState({
-    //             carData: data[0]
-    //         })
-    //     } catch(er) {console.log(er)}
-    // }
 
     useEffect(()=> {
-        // if(localStorage.getItem('id') === undefined)
         getData()
     },[])
 

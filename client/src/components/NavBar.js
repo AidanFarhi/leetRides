@@ -9,15 +9,17 @@ export default function NavBar(props) {
 
     const handleChange = (event) => {
         setText(event.target.value)
-        console.log(text)
     }
-    const search = (event) => {
+    const search = async (event) => {
         event.preventDefault()
-        console.log(text)
+        try {
+            const response = await fetch(`items/find/${text}`)
+            const data = await response.json()
+            props.methods[3](data)
+        } catch(er) {console.log(er)}
     }
 
     useEffect(()=> {
-        console.log(localStorage.getItem('loggedIn'))
         if (localStorage.getItem('loggedIn') === 'true') {
             setStatus(true)
         } else {

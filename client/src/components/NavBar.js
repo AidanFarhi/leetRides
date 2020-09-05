@@ -1,12 +1,14 @@
 
 import React, {useState, useEffect} from 'react'
 import {Link, Redirect} from 'react-router-dom'
+import {Login} from '../components'
 import '../cmp-styles/NavBar.css'
 
 export default function NavBar() {
     const [text, setText] = useState('')
     const [loggedIn, setLoginStatus] = useState(false)
     const [renderResults, setRender] = useState(false)
+    const [renderLogin, setLoginRender] = useState(false)
 
     const handleChange = (event) => {
         setText(event.target.value)
@@ -18,11 +20,21 @@ export default function NavBar() {
     const triggerRender = () => {
         setRender(true)
     }
-
     const logout = () => {
         localStorage.setItem('loggedIn', 'false')
         setLoginStatus(false)
     }
+    const triggerLoginRender = () => {
+        setLoginRender(true)
+    }
+    const login = () => {
+        setLoginStatus(true)
+        setLoginRender(false)
+    }
+    const closeLogin = () => {
+        setLoginRender(false)
+    }
+    const methods = [login, closeLogin]
 
     useEffect(()=> {
         if (localStorage.getItem('loggedIn') === 'true') {
@@ -48,9 +60,10 @@ export default function NavBar() {
             {loggedIn ? 
                 <button id='logout' onClick={logout}>logout</button> 
                 :
-                <Link id='login' to='/login'>login</Link>
+                <button id='login' onClick={triggerLoginRender}>login</button>
             }
             {renderResults ? <Redirect to={`/search/${text}`} /> : null}
+            {renderLogin ? <Login methods={methods}/> : null}
             </div>
         </div>
     )

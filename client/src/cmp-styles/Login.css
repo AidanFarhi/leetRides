@@ -16,6 +16,23 @@
     opacity: .99;
 }
 
+#close-login {
+    position: absolute;
+    right: 2%;
+    top: 3%;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-decoration: none;
+    background: transparent;
+    color: white;
+}
+
+#close-login:hover {
+    color: grey;
+    transition: all .15s ease;
+}
+
 #login-form-items, #login-form-items>form {
     display: flex;
     flex-direction: column;

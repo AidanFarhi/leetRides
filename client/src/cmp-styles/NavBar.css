@@ -71,10 +71,7 @@ h1 {
     text-decoration: none;
     background: transparent;
     color: white;
-}
-
-#login {
-    margin-top: 4%;
+    margin-bottom: 6%;
 }
 
 #logout:hover, #login:hover {

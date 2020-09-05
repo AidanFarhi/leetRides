@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
-import Register from './Register'
 import {Redirect} from 'react-router-dom'
 import '../cmp-styles/Login.css'
 
-export default function Login() {
+export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
     const [renderCars, setRenderCars] = useState(false)
@@ -30,6 +29,7 @@ export default function Login() {
             const login = await response.json()
             if (login.result === 'login-succesful') {
                 localStorage.setItem('loggedIn', 'true')
+                props.methods[0](true)
                 setRenderCars(true)
             }
         } catch(er) {console.log(er)}
@@ -40,6 +40,7 @@ export default function Login() {
 
     return (
         <div id='login-form-div'>
+            <button id='close-login' onClick={props.methods[1]}>X</button> 
             <div id='login-form-items'>
                 <h3 id='login-header'>Login/Register</h3>
                 <form onSubmit={handleSubmit}>

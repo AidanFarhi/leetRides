@@ -29,7 +29,6 @@ router.post('/', async(req, res, next) => {
             guestId: data[0].guest.dataValues.id
         })
         await GuestCart.destroy({where: {guestId: req.body.guestId}})
-        console.log('this is the order after it was created', order)
         res.send({response: 'order-placed', order: order})
     } catch(er) {next(er)}
 })

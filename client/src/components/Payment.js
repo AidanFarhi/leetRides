@@ -10,7 +10,7 @@ export default function Payment() {
     const [clientSecret, setClientSecret] = useState('');
     const [status, setSuccess] = useState({processed: false})
     const [renderGuestRegister, setRenderGuestRegister] = useState(false)
-    const [name, setName] = useState(localStorage.getItem('name') || '')
+    const [name, setName] = useState(localStorage.getItem('name') || 'guest')
     const [orderSummary, setOrderSummary] = useState({})
     const [renderUserPayment, setRenderUserPayment] = useState(false)
     const [guestName, setGuestName] = useState('')
@@ -55,7 +55,7 @@ export default function Payment() {
 
     const makeGuest = async() => {
         try {
-            const response = await fetch('guest/update', {
+            await fetch('guest/update', {
                 method: 'POST',
                 headers: {'Accept': 'application/json','Content-Type': 'application/json',},
                 body: JSON.stringify({
@@ -65,12 +65,6 @@ export default function Payment() {
                     email: email,
                 })
             })
-            const orderResult = await response.json()
-            console.log('guest Order Result', orderResult)
-            if (orderResult.response === 'guest-updated') {
-                // setName(orderResult[0].order.guest.name)
-                // renderGuestRegister(false)
-            }
         } catch(er) {setError(er)}
     }
     
@@ -121,7 +115,6 @@ export default function Payment() {
                     })
                     const result = await makeOrder.json()
                     if (result.response === 'order-placed') {
-                        console.log(result)
                         setOrderSummary(result.order)
                         setSuccess({processed: true})
                     }

@@ -29,6 +29,7 @@ export default function NavBar() {
     }
     const triggerLoginRender = () => {
         setLoginRender(true)
+        setRenderHome(true)
     }
 
     // these methods get passed to <Login/> component

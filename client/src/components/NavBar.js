@@ -7,7 +7,7 @@ import '../cmp-styles/NavBar.css'
 export default function NavBar() {
     const [text, setText] = useState('')
     const [loggedIn, setLoginStatus] = useState(false)
-    const [renderResults, setRender] = useState(false)
+    const [renderResults, setSearchRender] = useState(false)
     const [renderLogin, setLoginRender] = useState(false)
     const [renderHome, setRenderHome] = useState(false)
 
@@ -16,10 +16,10 @@ export default function NavBar() {
         event.preventDefault()
     }
     const search = async (event) => {
-        triggerRender()
+        triggerSearchRender()
     }
-    const triggerRender = () => {
-        setRender(true)
+    const triggerSearchRender = () => {
+        setSearchRender(true)
     }
     const logout = () => {
         localStorage.setItem('loggedIn', 'false')
@@ -31,7 +31,7 @@ export default function NavBar() {
         setLoginRender(true)
     }
 
-    // these methods get passed to Login component
+    // these methods get passed to <Login/> component
     const login = () => {
         setLoginStatus(true)
         setLoginRender(false)

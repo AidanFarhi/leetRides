@@ -9,6 +9,7 @@ export default function NavBar() {
     const [loggedIn, setLoginStatus] = useState(false)
     const [renderResults, setRender] = useState(false)
     const [renderLogin, setLoginRender] = useState(false)
+    const [renderHome, setRenderHome] = useState(false)
 
     const handleChange = (event) => {
         setText(event.target.value)
@@ -22,11 +23,15 @@ export default function NavBar() {
     }
     const logout = () => {
         localStorage.setItem('loggedIn', 'false')
+        localStorage.removeItem('id')
         setLoginStatus(false)
+        setRenderHome(true)
     }
     const triggerLoginRender = () => {
         setLoginRender(true)
     }
+
+    // these methods get passed to Login component
     const login = () => {
         setLoginStatus(true)
         setLoginRender(false)
@@ -37,10 +42,11 @@ export default function NavBar() {
     const methods = [login, closeLogin]
 
     useEffect(()=> {
+        if (renderHome) setRenderHome(false)
         if (localStorage.getItem('loggedIn') === 'true') {
             setLoginStatus(true)
         }    
-    },[])
+    },[renderHome === true])
 
     return (
         <div className='nav-main-div'>
@@ -64,6 +70,7 @@ export default function NavBar() {
             }
             {renderResults ? <Redirect to={`/search/${text}`} /> : null}
             {renderLogin ? <Login methods={methods}/> : null}
+            {renderHome ? <Redirect to='/' /> : null}
             </div>
         </div>
     )

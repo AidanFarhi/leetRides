@@ -28,7 +28,10 @@ export default function Login(props) {
             })
             const login = await response.json()
             if (login.result === 'login-succesful') {
+                console.log(login.user)
                 localStorage.setItem('loggedIn', 'true')
+                localStorage.setItem('id', login.user.id.toString())
+                localStorage.removeItem('guestId')
                 props.methods[0](true)
                 setRenderCars(true)
             }

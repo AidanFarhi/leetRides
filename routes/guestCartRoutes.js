@@ -1,6 +1,6 @@
 const { Router }  = require('express')
 const {GuestCart, Items} = require('../models')
-const { Sequelize, Op } = require('sequelize')
+const { Sequelize } = require('sequelize')
 const router = new Router()
 
 // route for the car associated with a user
@@ -36,11 +36,11 @@ router.post('/add', async(req, res, next) => {
 // route to remove item from cart
 router.post('/remove', async(req, res, next) => {
     try {
-        const response = await GuestCart.findAll({where: {id: req.body.id}})
+        const response = await GuestCart.findAll({where: {guestId: req.body.id}})
         const result = await response
         const itemArray = result[0].items
         const newArray = itemArray.filter(id => id !== req.body.itemId)
-        await GuestCart.update({items: [...newArray]},{where: {id: req.body.id}})
+        await GuestCart.update({items: [...newArray]},{where: {guestId: req.body.id}})
         res.send({response: 'item-deleted-guest'})
     } catch(er) {next(er)}
 })

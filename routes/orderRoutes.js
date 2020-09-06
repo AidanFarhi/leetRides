@@ -18,7 +18,7 @@ router.post('/', async(req, res, next) => {
         const response = await Cart.findAll({where: {userId: req.body.userId}, include: Users})
         const data = await response
         const totalCost = await calculateOrderAmount(data[0].items)
-        await Orders.create({
+        const order = await Orders.create({
             name: data[0].user.name,
             address: data[0].user.address,
             email: data[0].user.email,
@@ -28,7 +28,7 @@ router.post('/', async(req, res, next) => {
             userId: data[0].user.id
         })
         await Cart.destroy({where: {userId: req.body.userId}})
-        res.send({response: 'order-placed'})
+        res.send({response: 'order-placed', order: order})
     } catch(er) {next(er)}
 })
 

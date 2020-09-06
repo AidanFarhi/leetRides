@@ -16,12 +16,12 @@ router.post('/register', async(req, res, next) => {
 
 router.post('/update', async(req, res, next) => {
     try {
-        await Guests.update({
+        const guest = await Guests.update({
             name: req.body.name,
             address: req.body.address,
             email: req.body.email
         }, {where: {id: req.body.id}})
-        res.send({response: 'guest-updated'})
+        res.send({response: 'guest-updated', guest: guest})
     } catch(er) {next(er)}
 })
 

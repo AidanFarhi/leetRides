@@ -55,7 +55,7 @@ export default function Register(props) {
                 <br></br>
                 <input type='text' placeholder='Profile Pic Url (optional)' value={imageUrl.imageUrl} onChange={handleImageUrl}/>
                 <br></br>
-                <button type='submit'>Create</button>   
+                <button id='register-button' type='submit'>Create</button>   
             </form>
             </div>
         </div>

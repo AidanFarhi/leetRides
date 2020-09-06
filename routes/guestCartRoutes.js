@@ -40,7 +40,7 @@ router.post('/remove', async(req, res, next) => {
         const result = await response
         const itemArray = result[0].items
         const newArray = itemArray.filter(id => id !== req.body.itemId)
-        await GuestCart.update({items: [...newArray],},{where: {id: req.body.id}})
+        await GuestCart.update({items: [...newArray]},{where: {id: req.body.id}})
         res.send({response: 'item-deleted-guest'})
     } catch(er) {next(er)}
 })

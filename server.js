@@ -29,8 +29,10 @@ app.use('/car/cart', require('./routes/cartRoutes'))
 app.use('/cart', require('./routes/cartRoutes'))
 app.use('/order', require('./routes/orderRoutes'))
 app.use('/pay', require('./routes/paymentRoutes'))
+app.use('/car/guestCart', require('./routes/guestCartRoutes'))
 app.use('/guestCart', require('./routes/guestCartRoutes'))
 app.use('/guestOrder', require('./routes/guestOrderRoutes'))
+app.use('/car/guest', require('./routes/guestRoutes'))
 app.use('/guest', require('./routes/guestRoutes'))
 
 // Error catching endware

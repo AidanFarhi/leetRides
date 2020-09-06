@@ -1,5 +1,5 @@
 const { Router }  = require('express')
-const {GuestCart, Guests, GuestOrders, Items} = require('../models')
+const {GuestCart, Guests, GuestOrders, Items} = require('../models');
 const router = new Router()
 
 const reducer = (a, b) => a + b;
@@ -18,8 +18,8 @@ router.post('/', async(req, res, next) => {
         const response = await GuestCart.findAll({where: {guestId: req.body.guestId}, include: Guests})
         const data = await response
         const totalCost = await calculateOrderAmount(data[0].items)
-        console.log(data[0].guest.dataValues)
-        await GuestOrders.create({
+        console.log('line 21 of guestOrderRoutes', data[0].guest.dataValues)
+        const order = await GuestOrders.create({
             name: data[0].guest.dataValues.name,
             address: data[0].guest.dataValues.address,
             email: data[0].guest.dataValues.email,
@@ -29,7 +29,7 @@ router.post('/', async(req, res, next) => {
             guestId: data[0].guest.dataValues.id
         })
         await GuestCart.destroy({where: {guestId: req.body.guestId}})
-        res.send({response: 'order-placed'})
+        res.send({response: 'order-placed', order: order})
     } catch(er) {next(er)}
 })
 

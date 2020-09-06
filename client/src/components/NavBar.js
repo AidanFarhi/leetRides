@@ -1,32 +1,53 @@
 
 import React, {useState, useEffect} from 'react'
 import {Link, Redirect} from 'react-router-dom'
+import {Login} from '../components'
 import '../cmp-styles/NavBar.css'
 
-export default function NavBar(props) {
-    console.log('rendered')
+export default function NavBar() {
     const [text, setText] = useState('')
-    const [loggedIn, setStatus] = useState(props.methods[2])
-    const [renderResults, setRender] = useState(false)
+    const [loggedIn, setLoginStatus] = useState(false)
+    const [renderResults, setSearchRender] = useState(false)
+    const [renderLogin, setLoginRender] = useState(false)
+    const [renderHome, setRenderHome] = useState(false)
 
     const handleChange = (event) => {
         setText(event.target.value)
         event.preventDefault()
     }
     const search = async (event) => {
-        triggerRender()
+        triggerSearchRender()
     }
-    const triggerRender = () => {
-        setRender(true)
+    const triggerSearchRender = () => {
+        setSearchRender(true)
+    }
+    const logout = () => {
+        localStorage.setItem('loggedIn', 'false')
+        localStorage.removeItem('id')
+        setLoginStatus(false)
+        setRenderHome(true)
+    }
+    const triggerLoginRender = () => {
+        setLoginRender(true)
+        setRenderHome(true)
     }
 
+    // these methods get passed to <Login/> component
+    const login = () => {
+        setLoginStatus(true)
+        setLoginRender(false)
+    }
+    const closeLogin = () => {
+        setLoginRender(false)
+    }
+    const methods = [login, closeLogin]
+
     useEffect(()=> {
+        if (renderHome) setRenderHome(false)
         if (localStorage.getItem('loggedIn') === 'true') {
-            setStatus(true)
-        } else {
-            setStatus(false)
+            setLoginStatus(true)
         }    
-    },[])
+    },[renderHome === true])
 
     return (
         <div className='nav-main-div'>
@@ -44,11 +65,13 @@ export default function NavBar(props) {
             <Link to='/drivers' id='drivers'></Link>
             <Link to='/cart' id='cart'></Link>
             {loggedIn ? 
-                <button id='logout' onClick={props.methods[1]}>logout</button>
+                <button id='logout' onClick={logout}>logout</button> 
                 :
-                <button id='login' onClick={props.methods[0]}>login</button>
+                <button id='login' onClick={triggerLoginRender}>login</button>
             }
             {renderResults ? <Redirect to={`/search/${text}`} /> : null}
+            {renderLogin ? <Login methods={methods}/> : null}
+            {renderHome ? <Redirect to='/' /> : null}
             </div>
         </div>
     )

@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import Register from './Register'
+import {Redirect} from 'react-router-dom'
 import '../cmp-styles/Login.css'
 
 export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
-    const [registering, setRegister] = useState({registering: false})
+    const [renderCars, setRenderCars] = useState(false)
+    const [renderRegister, setRenderRegister] = useState(false)
 
     const handleUsername = (event) => {
         setUsername({
@@ -27,18 +28,23 @@ export default function Login(props) {
             })
             const login = await response.json()
             if (login.result === 'login-succesful') {
-                props.method(login.user)
+                console.log(login.user)
+                localStorage.setItem('loggedIn', 'true')
+                localStorage.setItem('id', login.user.id.toString())
+                localStorage.setItem('name', login.user.name)
+                localStorage.removeItem('guestId')
+                props.methods[0](true)
+                setRenderCars(true)
             }
         } catch(er) {console.log(er)}
     }
     const handleRegister = () => {
-        setRegister({
-            registering: !registering.registering
-        })
+        setRenderRegister(true)
     }
 
     return (
         <div id='login-form-div'>
+            <button id='close-login' onClick={props.methods[1]}>X</button> 
             <div id='login-form-items'>
                 <h3 id='login-header'>Login/Register</h3>
                 <form onSubmit={handleSubmit}>
@@ -49,7 +55,8 @@ export default function Login(props) {
                     <button id='submit-button' type='submit'>Login</button>   
                 </form>
                 <button onClick={handleRegister}>create an account</button>
-                {registering.registering ? <Register method={props.method}/> : null}
+                {renderRegister ? <Redirect to={'/register'} /> : null}
+                {renderCars ? <Redirect to={'/cars'}/> : null}
             </div>
         </div>
     )

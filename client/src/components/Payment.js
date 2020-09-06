@@ -65,20 +65,22 @@ export default function Payment() {
                     email: email,
                 })
             })
-            const created = await response.json()
-            console.log('updated guest info line 70 of Payment', created)
-            if (created.response === 'guest-updated') {
-                setName(created.guest.name)
-                renderGuestRegister(false)
+            const orderResult = await response.json()
+            console.log('guest Order Result', orderResult)
+            if (orderResult.response === 'guest-updated') {
+                // setName(orderResult[0].order.guest.name)
+                // renderGuestRegister(false)
             }
         } catch(er) {setError(er)}
     }
     
     const handleSubmit = async (event) => {
-        if (renderGuestRegister) console.log('make a guest')
+        event.preventDefault();
+        if (renderGuestRegister) {
+            makeGuest()
+        }    
         // We don't want to let default form submission happen here,
         // which would refresh the page.
-        event.preventDefault();
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
             // Make sure to disable form submission until Stripe.js has loaded.

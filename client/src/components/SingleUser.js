@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import '../cmp-styles/SingleUser.css'
 
 export default function SingleUser(props) {
@@ -9,11 +9,12 @@ export default function SingleUser(props) {
         carLinks: [],
         joinDate: '',
     })
+    const {id} = useParams()
 
     useEffect(()=> {
         const getData = async() => {
             try {
-                const getUserResponse =  await fetch(`/users/${props.location.query.id}`)
+                const getUserResponse =  await fetch(`/users/${id}`)
                 const data = await getUserResponse.json()
                 const user = data[0]
                 const dateJoined = user.createdAt.slice(0, 10)

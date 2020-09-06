@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import {useParams} from 'react-router-dom'
 import '../cmp-styles/SingleItem.css'
 
 export default function SingleItem(props) {
     const [state, setState] = useState({
         carData: {},
     })
-
+    const {id} = useParams()
     // check local storage to see if guest is logged in or not
     // if so, then post to guest cart
     const addItem = async() => {
@@ -57,16 +58,9 @@ export default function SingleItem(props) {
         } catch(er) {console.log(er)}
     }
     const getData = async() => {
-        let id = ''
-        if (localStorage.getItem('carId') === null) {
-            id = props.location.query.id
-        } else {
-            id = localStorage.getItem('carId')
-        }
         try {
             const response =  await fetch(`/items/${id}`)
             const data = await response.json()
-            localStorage.setItem('carId', `${id}`)
             setState({
                 carData: data[0]
             })

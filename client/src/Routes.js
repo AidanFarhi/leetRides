@@ -22,10 +22,9 @@ export default function Routes() {
             <Route path='/cars' component={AllItems}/>
             <Route path='/drivers' component={AllUsers}/>
             <Route path='/cart' component={Cart}/>
-            {/* This needs to be dynamic */}
             <Route path='/driver/:id' children={<SingleUser />}/>
             {/* This needs to be dynamic */}
-            <Route path='/car' component={SingleItem} />
+            <Route path='/car/:id' children={<SingleItem />} />
             <Route path='/checkout' component={Checkout} />
             <Route path='/pay' component={Payment} />
             <Route path='/summary' component={OrderSummary} />

@@ -32,7 +32,7 @@ export default function SingleUser(props) {
                     console.log(cars)
                     const carLinks = cars.map((car, i) => {
                         return (
-                            <Link key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><img className='car-order-image' src={car.imageUrl} alt='a nice car'></img></Link>
+                            <Link key={i} to={{pathname:`/car/${car.id}`}}><img className='car-order-image' src={car.imageUrl} alt='a nice car'></img></Link>
                         )
                     })
                     setState({

@@ -12,16 +12,14 @@ export default function SingleItem(props) {
     const addItem = async() => {
         if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
             addItemGuest()
-            return
         } else if (localStorage.getItem('id') === null) {
             addItemGuest()
-            return
         }
         try {
             const response = await fetch('cart/add', {
                 method: 'POST',
                 headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                body: JSON.stringify({userId: localStorage.getItem('id'), itemId: state.carData.id})
+                body: JSON.stringify({userId: localStorage.getItem('id'), itemId: id})
             })
             const result = await response.json()
             console.log(result)
@@ -40,7 +38,7 @@ export default function SingleItem(props) {
                 const newGuestCartResponse = await fetch('guestCart/add', {
                     method: 'POST',
                     headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                    body: JSON.stringify({guestId: resultGuest.newGuest.id, itemId: state.carData.id})
+                    body: JSON.stringify({guestId: resultGuest.newGuest.id, itemId: id})
                 })
                 const result = await newGuestCartResponse.json()
                 console.log(result)
@@ -50,7 +48,7 @@ export default function SingleItem(props) {
                 const guestCartResponse = await fetch('guestCart/add', {
                     method: 'POST',
                     headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                    body: JSON.stringify({guestId: localStorage.getItem('guestId'), itemId: state.carData.id})
+                    body: JSON.stringify({guestId: localStorage.getItem('guestId'), itemId: id})
                 })
                 const result = await guestCartResponse.json()
                 console.log(result)

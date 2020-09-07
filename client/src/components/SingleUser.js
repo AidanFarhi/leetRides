@@ -54,7 +54,7 @@ export default function SingleUser(props) {
     return(
         <div id='single-user-main-div'>
             <div className='user-div'>
-                <img src={state.userData.imageUrl} alt='an user icon'></img>
+                <img id='user-image' src={state.userData.imageUrl} alt='an user icon'></img>
                 <h3>{state.userData.username}</h3>
                 <p>User Joined: {state.joinDate}</p>
                 <h3>Recently Ordered</h3>

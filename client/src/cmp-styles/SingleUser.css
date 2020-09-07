@@ -12,6 +12,11 @@
     align-items: center;
 }
 
+#user-image {
+    height: 25%;
+    width: 25%;
+}
+
 .car-order-image {
     height: 150px;
     width: 200px;

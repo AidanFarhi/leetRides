@@ -16,6 +16,7 @@ export default function Payment() {
     const [guestName, setGuestName] = useState('')
     const [address, setAddress] = useState('')
     const [email, setEmail] = useState('')
+    const [processing, setProcessing] = useState(false)
     
     const stripe = useStripe()
 
@@ -67,8 +68,9 @@ export default function Payment() {
             })
         } catch(er) {setError(er)}
     }
-    
+
     const handleSubmit = async (event) => {
+        setProcessing(true)
         event.preventDefault();
         if (renderGuestRegister) {
             makeGuest()
@@ -91,7 +93,6 @@ export default function Payment() {
         if (result.error) {
             // Show error to your customer (e.g., insufficient funds)
             setError(result.error.message)
-            console.log(result.error.message);
         } else {
             // The payment has been processed!
             //this is where the order gets placed
@@ -149,9 +150,19 @@ export default function Payment() {
             : null}
             <h3>{error}</h3>
             {renderUserPayment ? <CardSection /> : null}
-            {renderUserPayment ? <button disabled={!stripe}>Make Payment</button> : null}
+            {renderUserPayment ? 
+            <button id='make-payment-button' disabled={!stripe}>
+                <span id='make-payment'>
+                    {processing ? 'Processing..' :'Make Payment'}
+                </span>
+            </button> : null}
             {renderGuestRegister ? <CardSection /> : null}
-            {renderGuestRegister ? <button disabled={!stripe}>Make Payment</button> : null}
+            {renderGuestRegister ? 
+            <button id='make-payment-button' disabled={!stripe}>
+                <span id='make-payment'>
+                    {processing ? 'Processing..' :'Make Payment'}
+                </span>
+            </button> : null}
         </form>  
     )
 }

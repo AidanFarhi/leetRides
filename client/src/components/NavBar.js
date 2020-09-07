@@ -79,6 +79,7 @@ export default function NavBar() {
                     placeholder='Find your ride..' 
                     value={text}
                     onChange={handleChange}
+                    required
                     />
                 <button id='search' type='submit'></button>
             </form>

@@ -4,13 +4,13 @@ import '../cmp-styles/AllItems.css'
 
 export default function Results() {
     const [itemDivs, setItemDivs] = useState([])
+    const [loading, setLoading] = useState(true)
     const {query} = useParams()
 
     const getData = async() => {
         try {
             const response = await fetch(`find/${query}`)
             const data = await response.json()
-            console.log(data)
             const divs = data.map((car, i) => {
                 return (
                     <div key={i} className='car'>
@@ -22,6 +22,7 @@ export default function Results() {
                     </div>
                 )
             })
+            setLoading(false)
             setItemDivs(divs)
         } catch(er) {console.log(er)}
     }
@@ -30,8 +31,11 @@ export default function Results() {
         getData()
     },[])
 
+    console.log(itemDivs)
     return (
         <div className='cars-main-div'>
+            {loading ? <h2>Finding cars...</h2> : null}
+            {itemDivs.length === 0 && !loading ? <h2>No Results Found</h2> : null}
             {itemDivs}
         </div>
     )

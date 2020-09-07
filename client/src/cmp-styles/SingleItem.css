@@ -52,6 +52,11 @@ button:focus {
     outline: 0;
 }
 
+#add-to-cart-button span#added {
+    display: none;
+    opacity: 0;
+}
+
 #add-to-cart-button.clicked #add{
     display: none;
     opacity: 0;
@@ -59,13 +64,9 @@ button:focus {
 
 #add-to-cart-button.clicked span#added {
     display: inherit;
-    animation: added .5s ease-in forwards;
+    animation: added .25s ease-in forwards;
 }
 
-#add-to-cart-button span#added {
-    display: none;
-    opacity: 0;
-}
 
 @keyframes added {
     0%,

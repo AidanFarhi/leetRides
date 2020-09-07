@@ -23,14 +23,12 @@ const init = async() => {
 init()
 
 if (process.env.NODE_ENV === 'production') {
-    // Exprees will serve up production assets
-    app.use(express.static('/build'));
-    // Express serve up index.html file if it doesn't recognize route
-    const path = require('path');
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-    });
-}
+    app.use(express.static('client/build'));
+}    
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+});
+
 app.use('/search', require('./routes/itemRoutes'))
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))

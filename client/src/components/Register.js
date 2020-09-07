@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Redirect} from 'react-router-dom'
 import '../cmp-styles/Register.css'
 
 export default function Register(props) {
@@ -8,6 +9,8 @@ export default function Register(props) {
     const [imageUrl, setImageUrl] = useState({imageUrl: ''})
     const [address, setAddress] = useState({address: ''})
     const [email, setEmail] = useState({email: ''})
+    const [renderCars, setRenderCars] = useState(false)
+    const [error, setError] = useState('')
 
     const handleName = (event) => setName({name: event.target.value})
     const handleUsername = (event) => setUsername({username: event.target.value})
@@ -33,15 +36,22 @@ export default function Register(props) {
             })
             const create = await response.json()
             if (create.response === 'user-created') {
-                props.method(create.newUser)
+                localStorage.setItem('loggedIn', 'true')
+                localStorage.setItem('id', create.newUser.id.toString())
+                localStorage.setItem('name', create.newUser.name)
+                localStorage.removeItem('guestId')
+                props.methods[1]()
+                setRenderCars(true)
             }
-        } catch(er) {console.log(er)}
+        } catch(er) {setError(er)}
     }
 
     return (
         <div id='register-form-div'>
+            <button id='close-register' onClick={props.methods[0]}>X</button> 
             <div id='register-form-div-items'>
-            <h3 id='register-header'>Create an Account</h3>    
+            <h3 id='register-header'>Create an Account</h3> 
+            <h2 id='error-message-register'>{error}</h2>   
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Full Name' value={name.name} onChange={handleName} required/>
                 <br></br>
@@ -58,6 +68,7 @@ export default function Register(props) {
                 <button id='register-button' type='submit'>Create</button>   
             </form>
             </div>
+            {renderCars ? <Redirect to={'/cars'}/> : null}
         </div>
     )
 }

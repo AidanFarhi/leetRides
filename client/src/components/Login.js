@@ -6,7 +6,7 @@ export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
     const [renderCars, setRenderCars] = useState(false)
-    const [renderRegister, setRenderRegister] = useState(false)
+    const [error, setError] = useState('')
 
     const handleUsername = (event) => {
         setUsername({
@@ -28,18 +28,14 @@ export default function Login(props) {
             })
             const login = await response.json()
             if (login.result === 'login-succesful') {
-                console.log(login.user)
                 localStorage.setItem('loggedIn', 'true')
                 localStorage.setItem('id', login.user.id.toString())
                 localStorage.setItem('name', login.user.name)
                 localStorage.removeItem('guestId')
-                props.methods[0](true)
+                props.methods[0]()
                 setRenderCars(true)
             }
-        } catch(er) {console.log(er)}
-    }
-    const handleRegister = () => {
-        setRenderRegister(true)
+        } catch(er) {setError(er)}
     }
 
     return (
@@ -47,6 +43,7 @@ export default function Login(props) {
             <button id='close-login' onClick={props.methods[1]}>X</button> 
             <div id='login-form-items'>
                 <h3 id='login-header'>Login/Register</h3>
+                <h2 id='error-message-login'>{error}</h2>
                 <form onSubmit={handleSubmit}>
                     <input type='text' name='username' placeholder='Username' value={username.username} onChange={handleUsername} required/>
                     <br></br>
@@ -54,8 +51,7 @@ export default function Login(props) {
                     <br></br>
                     <button id='submit-button' type='submit'>Login</button>   
                 </form>
-                <button onClick={handleRegister}>create an account</button>
-                {renderRegister ? <Redirect to={'/register'} /> : null}
+                <button onClick={props.methods[2]}>create an account</button>
                 {renderCars ? <Redirect to={'/cars'}/> : null}
             </div>
         </div>

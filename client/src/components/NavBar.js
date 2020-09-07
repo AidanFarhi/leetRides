@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect} from 'react'
 import {Link, Redirect} from 'react-router-dom'
-import {Login} from '../components'
+import {Login, Register} from '../components'
 import '../cmp-styles/NavBar.css'
 
 export default function NavBar() {
@@ -10,6 +10,7 @@ export default function NavBar() {
     const [renderResults, setSearchRender] = useState(false)
     const [renderLogin, setLoginRender] = useState(false)
     const [renderHome, setRenderHome] = useState(false)
+    const [renderRegister, setRegisterRender] = useState(false)
 
     const handleChange = (event) => {
         setText(event.target.value)
@@ -31,16 +32,27 @@ export default function NavBar() {
         setLoginRender(true)
         setRenderHome(true)
     }
-
     // these methods get passed to <Login/> component
     const login = () => {
         setLoginStatus(true)
         setLoginRender(false)
+        setRegisterRender(false)
     }
     const closeLogin = () => {
         setLoginRender(false)
     }
-    const methods = [login, closeLogin]
+    const triggerRegisterRender = () => {
+        setRegisterRender(true)
+        setLoginRender(false)
+    }
+    const loginMethods = [login, closeLogin, triggerRegisterRender]
+
+    // these methods get passed to <Register /> component
+    const closeRegister = () => {
+        setRegisterRender(false)
+        setLoginRender(true)
+    }
+    const registerMethods = [closeRegister, login]
 
     useEffect(()=> {
         if (renderHome) setRenderHome(false)
@@ -70,8 +82,9 @@ export default function NavBar() {
                 <button id='login' onClick={triggerLoginRender}>login</button>
             }
             {renderResults ? <Redirect to={`/search/${text}`} /> : null}
-            {renderLogin ? <Login methods={methods}/> : null}
+            {renderLogin ? <Login methods={loginMethods}/> : null}
             {renderHome ? <Redirect to='/' /> : null}
+            {renderRegister ? <Register methods={registerMethods} /> : null}
             </div>
         </div>
     )

@@ -15,9 +15,7 @@ const init = async() => {
     try {
         console.log('nothing to update')
     } catch(er) { console.log(er) }
-    app.listen(PORT, ()=> {
-        console.log(`Server live on port: ${PORT}`)
-    })
+    app.listen(process.env.PORT || 4000)
 }
 
 init()

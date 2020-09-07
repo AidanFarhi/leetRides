@@ -18,7 +18,6 @@ router.post('/', async(req, res, next) => {
         const response = await GuestCart.findAll({where: {guestId: req.body.guestId}, include: Guests})
         const data = await response
         const totalCost = await calculateOrderAmount(data[0].items)
-        console.log('line 21 of guestOrderRoutes', data[0].guest.dataValues)
         const order = await GuestOrders.create({
             name: data[0].guest.dataValues.name,
             address: data[0].guest.dataValues.address,
@@ -30,7 +29,7 @@ router.post('/', async(req, res, next) => {
         })
         await GuestCart.destroy({where: {guestId: req.body.guestId}})
         res.send({response: 'order-placed', order: order})
-    } catch(er) {next(er)}
+    } catch(er) {res.send(er)}
 })
 
 // this will get the latest order made by a user

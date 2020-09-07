@@ -51,29 +51,46 @@ export default function Payment() {
             })
             const result = await response.json()
             setClientSecret(result.clientSecret)
-        } catch(er) {console.log(er)}
-    }
-
-    const makeGuest = async() => {
-        try {
-            await fetch('guest/update', {
-                method: 'POST',
-                headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                body: JSON.stringify({
-                    id: Number(localStorage.getItem('guestId')),
-                    name: guestName,
-                    address: address,
-                    email: email,
-                })
-            })
         } catch(er) {setError(er)}
     }
 
+    const validateEmail = (email) => {
+        const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        const emailCheckResult = reg.test(email.toString().toLowerCase())
+        console.log(emailCheckResult)
+        return emailCheckResult
+    }
+    const makeGuest = async() => {
+        if (validateEmail(email)) {
+            try {
+                const makeGuestResult = await fetch('guest/update', {
+                    method: 'POST',
+                    headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                    body: JSON.stringify({
+                        id: Number(localStorage.getItem('guestId')),
+                        name: guestName,
+                        address: address,
+                        email: email,
+                    })
+                })
+                return makeGuestResult
+            } catch(er) {console.log(er)}
+        } else {
+            console.log('was not valid email')
+            return 'not valid email'
+        }
+    }
     const handleSubmit = async (event) => {
         setProcessing(true)
         event.preventDefault();
         if (renderGuestRegister) {
-            makeGuest()
+            const response = await makeGuest()
+            const result = await response
+            if (result === 'not valid email') {
+                setError('Not a valid email')
+                setProcessing(false)
+                return
+            }
         }    
         // We don't want to let default form submission happen here,
         // which would refresh the page.
@@ -91,6 +108,7 @@ export default function Payment() {
             }
         })
         if (result.error) {
+            setProcessing(false)
             // Show error to your customer (e.g., insufficient funds)
             setError(result.error.message)
         } else {
@@ -98,27 +116,31 @@ export default function Payment() {
             //this is where the order gets placed
             if (result.paymentIntent.status === 'succeeded') {
                 if (localStorage.getItem('loggedIn') === 'true') {
-                    const makeOrder = await fetch('/order', {
-                        method: 'POST',
-                        headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                        body: JSON.stringify({userId: Number(localStorage.getItem('id'))})
-                    })
-                    const result = await makeOrder.json()
-                    if (result.response === 'order-placed') {
-                        setOrderSummary(result.order)
-                        setSuccess({processed: true})
-                    }
+                    try {
+                        const makeOrder = await fetch('/order', {
+                            method: 'POST',
+                            headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                            body: JSON.stringify({userId: Number(localStorage.getItem('id'))})
+                        })
+                        const result = await makeOrder.json()
+                        if (result.response === 'order-placed') {
+                            setOrderSummary(result.order)
+                            setSuccess({processed: true})
+                        }
+                    } catch(er) {setError(er)}
                 } else {
-                    const makeOrder = await fetch('/guestOrder', {
-                        method: 'POST',
-                        headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                        body: JSON.stringify({guestId: Number(localStorage.getItem('guestId'))})
-                    })
-                    const result = await makeOrder.json()
-                    if (result.response === 'order-placed') {
-                        setOrderSummary(result.order)
-                        setSuccess({processed: true})
-                    }
+                    try {
+                        const makeOrder = await fetch('/guestOrder', {
+                            method: 'POST',
+                            headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                            body: JSON.stringify({guestId: Number(localStorage.getItem('guestId'))})
+                        })
+                        const result = await makeOrder.json()
+                        if (result.response === 'order-placed') {
+                            setOrderSummary(result.order)
+                            setSuccess({processed: true})
+                        }
+                    } catch(er) {setError(er)}
                 }
             }
         }

@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-const models = require('./models')
+
 require('dotenv').config()
 
 const app = express()

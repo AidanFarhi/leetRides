@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import '../cmp-styles/SingleUser.css'
 
 export default function SingleUser(props) {
@@ -9,11 +9,12 @@ export default function SingleUser(props) {
         carLinks: [],
         joinDate: '',
     })
+    const {id} = useParams()
 
     useEffect(()=> {
         const getData = async() => {
             try {
-                const getUserResponse =  await fetch(`/users/${props.location.query.id}`)
+                const getUserResponse =  await fetch(`/users/${id}`)
                 const data = await getUserResponse.json()
                 const user = data[0]
                 const dateJoined = user.createdAt.slice(0, 10)
@@ -31,7 +32,7 @@ export default function SingleUser(props) {
                     console.log(cars)
                     const carLinks = cars.map((car, i) => {
                         return (
-                            <Link key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><img className='car-order-image' src={car.imageUrl} alt='a nice car'></img></Link>
+                            <Link key={i} to={{pathname:`/car/${car.id}`}}><img className='car-order-image' src={car.imageUrl} alt='a nice car'></img></Link>
                         )
                     })
                     setState({

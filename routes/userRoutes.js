@@ -51,7 +51,6 @@ router.post('/register', async(req, res, next) => {
             email: email,
             password: hash
         })
-        console.log(newUser)
         res.send({response: 'user-created', newUser: newUser})
     } catch(er) {next(er)}
 })

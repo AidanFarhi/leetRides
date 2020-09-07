@@ -19,7 +19,7 @@ export default function AllUsers() {
                             <div key={i} className='user-div'>
                                 <img src={user.imageUrl} alt='an user icon'></img>
                                 <div className='user-data'>
-                                    <Link key={i} to={{pathname:'/driver', query:{id: user.id.toString()}}}><h3>{user.username}</h3></Link>
+                                    <Link key={i} to={{pathname:`/driver/${user.id}`}}><h3>{user.username}</h3></Link>
                                 </div>
                             </div>
                         )

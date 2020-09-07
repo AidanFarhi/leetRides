@@ -1,26 +1,25 @@
 import React, {useState, useEffect} from 'react'
+import {useParams} from 'react-router-dom'
 import '../cmp-styles/SingleItem.css'
 
 export default function SingleItem(props) {
     const [state, setState] = useState({
         carData: {},
     })
-
+    const {id} = useParams()
     // check local storage to see if guest is logged in or not
     // if so, then post to guest cart
     const addItem = async() => {
         if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
             addItemGuest()
-            return
         } else if (localStorage.getItem('id') === null) {
             addItemGuest()
-            return
         }
         try {
             const response = await fetch('cart/add', {
                 method: 'POST',
                 headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                body: JSON.stringify({userId: localStorage.getItem('id'), itemId: state.carData.id})
+                body: JSON.stringify({userId: localStorage.getItem('id'), itemId: id})
             })
             const result = await response.json()
             console.log(result)
@@ -39,7 +38,7 @@ export default function SingleItem(props) {
                 const newGuestCartResponse = await fetch('guestCart/add', {
                     method: 'POST',
                     headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                    body: JSON.stringify({guestId: resultGuest.newGuest.id, itemId: state.carData.id})
+                    body: JSON.stringify({guestId: resultGuest.newGuest.id, itemId: id})
                 })
                 const result = await newGuestCartResponse.json()
                 console.log(result)
@@ -49,7 +48,7 @@ export default function SingleItem(props) {
                 const guestCartResponse = await fetch('guestCart/add', {
                     method: 'POST',
                     headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                    body: JSON.stringify({guestId: localStorage.getItem('guestId'), itemId: state.carData.id})
+                    body: JSON.stringify({guestId: localStorage.getItem('guestId'), itemId: id})
                 })
                 const result = await guestCartResponse.json()
                 console.log(result)
@@ -57,16 +56,9 @@ export default function SingleItem(props) {
         } catch(er) {console.log(er)}
     }
     const getData = async() => {
-        let id = ''
-        if (localStorage.getItem('carId') === null) {
-            id = props.location.query.id
-        } else {
-            id = localStorage.getItem('carId')
-        }
         try {
             const response =  await fetch(`/items/${id}`)
             const data = await response.json()
-            localStorage.setItem('carId', `${id}`)
             setState({
                 carData: data[0]
             })

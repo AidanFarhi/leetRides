@@ -1,7 +1,7 @@
 const { Router }  = require('express')
 // const {Cart, Users, Orders} = require('../models')
 const router = new Router()
-const stripe = require('stripe')(`${process.env.REACT_APP_STRIPE_API_KEY}`)
+const stripe = require('stripe')(process.env.REACT_APP_STRIPE_API_KEY)
 
 const reducer = (a, b) => a + b;
 const calculateOrderAmount = items => {

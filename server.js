@@ -34,6 +34,7 @@ app.use('/guestCart', require('./routes/guestCartRoutes'))
 app.use('/guestOrder', require('./routes/guestOrderRoutes'))
 app.use('/car/guest', require('./routes/guestRoutes'))
 app.use('/guest', require('./routes/guestRoutes'))
+app.use('/key', require('./routes/serveKeys'))
 
 // Error catching endware
 app.use((err, req, res, next) => {

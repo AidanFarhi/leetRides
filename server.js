@@ -15,11 +15,22 @@ const init = async() => {
     try {
         console.log('nothing to update')
     } catch(er) { console.log(er) }
-    app.listen(process.env.PORT || 4000)
+    app.listen(process.env.PORT || 4000, () => {
+        console.log('app listening')
+    })
 }
 
 init()
 
+if (process.env.NODE_ENV === 'production') {
+    // Exprees will serve up production assets
+    app.use(express.static('client/build'));
+    // Express serve up index.html file if it doesn't recognize route
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    });
+}
 app.use('/search', require('./routes/itemRoutes'))
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))
@@ -34,15 +45,6 @@ app.use('/car/guest', require('./routes/guestRoutes'))
 app.use('/guest', require('./routes/guestRoutes'))
 app.use('/key', require('./routes/serveKeys'))
 
-if (process.env.NODE_ENV === 'production') {
-    // Exprees will serve up production assets
-    app.use(express.static('client/build'));
-    // Express serve up index.html file if it doesn't recognize route
-    const path = require('path');
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
 
 // Error catching endware
 app.use((err, req, res, next) => {

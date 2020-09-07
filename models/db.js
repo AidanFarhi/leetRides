@@ -1,8 +1,6 @@
 // link to database goes here
 const Sequelize = require('sequelize')
-const db = new Sequelize(
-    'postgres://aidanfarhi:secret123@localhost:5432/qccshopper', 
-    {logging: false},
-)
+const uri = process.env.DATABASE_URI
+const db = new Sequelize(uri,{logging: false},)
 
 module.exports = db

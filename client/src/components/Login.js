@@ -5,7 +5,6 @@ import '../cmp-styles/Login.css'
 export default function Login(props) {
     const [username, setUsername] = useState({username: ''})
     const [password, setPassword] = useState({password: ''})
-    const [renderCars, setRenderCars] = useState(false)
     const [error, setError] = useState('')
 
     const handleUsername = (event) => {
@@ -28,12 +27,16 @@ export default function Login(props) {
             })
             const login = await response.json()
             if (login.result === 'login-succesful') {
+                setError('Login Successful!')
                 localStorage.setItem('loggedIn', 'true')
                 localStorage.setItem('id', login.user.id.toString())
                 localStorage.setItem('name', login.user.name)
                 localStorage.removeItem('guestId')
-                props.methods[0]()
-                setRenderCars(true)
+                setTimeout(() => {
+                    props.methods[0]()
+                }, 700)
+            } else {
+                setError(login.result)
             }
         } catch(er) {setError(er)}
     }
@@ -43,7 +46,7 @@ export default function Login(props) {
             <button id='close-login' onClick={props.methods[1]}>X</button> 
             <div id='login-form-items'>
                 <h3 id='login-header'>Login/Register</h3>
-                <h2 id='error-message-login'>{error}</h2>
+                <p id='error-message-login'>{error}</p>
                 <form onSubmit={handleSubmit}>
                     <input type='text' name='username' placeholder='Username' value={username.username} onChange={handleUsername} required/>
                     <br></br>
@@ -52,7 +55,6 @@ export default function Login(props) {
                     <button id='submit-button' type='submit'>Login</button>   
                 </form>
                 <button onClick={props.methods[2]}>create an account</button>
-                {renderCars ? <Redirect to={'/cars'}/> : null}
             </div>
         </div>
     )

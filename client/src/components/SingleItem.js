@@ -7,9 +7,14 @@ export default function SingleItem(props) {
         carData: {},
     })
     const {id} = useParams()
+
+    const clickAnimation = () => {
+        document.getElementById('add-to-cart-button').classList.add('clicked')
+    }
     // check local storage to see if guest is logged in or not
-    // if so, then post to guest cart
+    // if so, then post to guest cart   
     const addItem = async() => {
+        clickAnimation()
         if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
             addItemGuest()
         } else if (localStorage.getItem('id') === null) {
@@ -78,7 +83,10 @@ export default function SingleItem(props) {
                     <h3>{state.carData.name}</h3>
                     <h3>${state.carData.price}.00</h3>
                     <p>{state.carData.description}</p>
-                    <button onClick={addItem}>Add to cart</button>
+                    <button id='add-to-cart-button' onClick={addItem}>
+                        <span id='add'>Add to cart</span>
+                        <span id='added'>Item Added</span>
+                    </button>
                 </div>
             </div>
         </div>

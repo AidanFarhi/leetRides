@@ -45,3 +45,34 @@
     -moz-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
     box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
 }
+
+/* Add To Cart Animation */
+
+button:focus {
+    outline: 0;
+}
+
+#add-to-cart-button.clicked #add{
+    display: none;
+    opacity: 0;
+}
+
+#add-to-cart-button.clicked span#added {
+    display: inherit;
+    animation: added .5s ease-in forwards;
+}
+
+#add-to-cart-button span#added {
+    display: none;
+    opacity: 0;
+}
+
+@keyframes added {
+    0%,
+    80% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}

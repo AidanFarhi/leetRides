@@ -42,6 +42,8 @@ export default function Register(props) {
                 localStorage.removeItem('guestId')
                 props.methods[1]()
                 setRenderCars(true)
+            } else {
+                setError(create.response)
             }
         } catch(er) {setError(er)}
     }
@@ -51,7 +53,7 @@ export default function Register(props) {
             <button id='close-register' onClick={props.methods[0]}>X</button> 
             <div id='register-form-div-items'>
             <h3 id='register-header'>Create an Account</h3> 
-            <h2 id='error-message-register'>{error}</h2>   
+            <p id='error-message-register'>{error}</p>   
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Full Name' value={name.name} onChange={handleName} required/>
                 <br></br>

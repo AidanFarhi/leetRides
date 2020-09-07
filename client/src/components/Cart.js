@@ -53,7 +53,7 @@ export default function Cart() {
                     return(
                         <div className='cart-item' key={i}>
                             <img src={car.imageUrl} alt='a nice car'></img>
-                            <Link key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
+                            <Link key={i} to={{pathname:`/car/${car.id}`}}><h3>{car.name}</h3></Link>
                             <p>${car.price}.00</p>
                             <button onClick={()=> removeItem(car.id)}>Delete</button>
                         </div>
@@ -81,7 +81,7 @@ export default function Cart() {
                     return(
                         <div className='cart-item' key={i}>
                             <img src={car.imageUrl} alt='a nice car'></img>
-                            <Link key={i} to={{pathname:'/car', query:{id: car.id.toString()}}}><h3>{car.name}</h3></Link>
+                            <Link key={i} to={{pathname:`/car/${car.id}`}}><h3>{car.name}</h3></Link>
                             <p>${car.price}.00</p>
                             <button onClick={()=> removeItem(car.id)}>Delete</button>
                         </div>

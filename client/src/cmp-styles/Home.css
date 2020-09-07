@@ -8,3 +8,12 @@ body {
     background-attachment: fixed;
     background-size: 100%;
 }
+
+#main-home-banner {
+    z-index: -1;
+    top: 68.5%;
+    left: 41%;
+    position: fixed;
+    opacity: .2;
+    font-size: 250%;
+}

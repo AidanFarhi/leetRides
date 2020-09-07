@@ -14,6 +14,7 @@ export default function Home() {
 
     return(
         <div id='home-main-div'>
+            <p id='main-home-banner'>Find Your Drive</p>
             <NavBar />
             <Routes />
         </div>

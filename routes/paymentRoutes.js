@@ -19,7 +19,7 @@ router.post('/', async(req, res, next) => {
         currency: "usd"
     });
     res.send({clientSecret: paymentIntent.client_secret})
-    } catch(er) {next(er)}
+    } catch(er) {res.send(er)}
 })
 
 module.exports = router

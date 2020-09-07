@@ -22,7 +22,7 @@ router.post('/update', async(req, res, next) => {
             email: req.body.email
         }, {where: {id: req.body.id}})
         res.send({response: 'guest-updated', guest: guest})
-    } catch(er) {next(er)}
+    } catch(er) {res.send(er)}
 })
 
 module.exports = router

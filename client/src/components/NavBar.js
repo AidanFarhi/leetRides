@@ -29,16 +29,25 @@ export default function NavBar() {
         setRenderHome(true)
     }
     const triggerLoginRender = () => {
+        cover()
         setLoginRender(true)
         setRenderHome(true)
+    }
+    const cover = () => {
+        document.getElementById('cover').style.display = 'block'
+    }
+    const uncover = () => {
+        document.getElementById('cover').style.display = 'none' 
     }
     // these methods get passed to <Login/> component
     const login = () => {
         setLoginStatus(true)
         setLoginRender(false)
         setRegisterRender(false)
+        uncover()
     }
     const closeLogin = () => {
+        uncover()
         setLoginRender(false)
     }
     const triggerRegisterRender = () => {
@@ -63,6 +72,7 @@ export default function NavBar() {
 
     return (
         <div className='nav-main-div'>
+            <div id='cover'></div>
             <Link id='header-link' to='/'><h1>LeetRides</h1></Link>
             <form id='search-form' onSubmit={search}>
                 <input id='search-input' type='text' 

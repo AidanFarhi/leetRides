@@ -18,37 +18,46 @@ export default function Register(props) {
     const handleImageUrl = (event) => setImageUrl({imageUrl: event.target.value})
     const handleAddress = (event) => setAddress({address: event.target.value})
     const handleEmail = (event) => setEmail({email: event.target.value})
+
+    const validateEmail = (email) => {
+        const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        return reg.test(email.toString().toLowerCase())
+    }
     
     const handleSubmit = async (event) => {
         event.preventDefault()
-        try {
-            const response = await fetch('users/register', {
-                method: 'POST',
-                headers: {'Accept': 'application/json','Content-Type': 'application/json',},
-                body: JSON.stringify({
-                    name: name.name,
-                    username: username.username, 
-                    imageUrl: imageUrl.imageUrl,
-                    address: address.address,
-                    email: email.email,
-                    password: password.password
+        if (validateEmail(email.email)) {
+            try {
+                const response = await fetch('users/register', {
+                    method: 'POST',
+                    headers: {'Accept': 'application/json','Content-Type': 'application/json',},
+                    body: JSON.stringify({
+                        name: name.name,
+                        username: username.username, 
+                        imageUrl: imageUrl.imageUrl,
+                        address: address.address,
+                        email: email.email,
+                        password: password.password
+                    })
                 })
-            })
-            const create = await response.json()
-            if (create.response === 'user-created') {
-                setError('Success! You are now being logged in.')
-                localStorage.setItem('loggedIn', 'true')
-                localStorage.setItem('id', create.newUser.id.toString())
-                localStorage.setItem('name', create.newUser.name)
-                localStorage.removeItem('guestId')
-                setTimeout(() => {
-                    props.methods[1]()
-                    setRenderCars(true)
-                }, 1500)
-            } else {
-                setError(create.response)
-            }
-        } catch(er) {setError(er)}
+                const create = await response.json()
+                if (create.response === 'user-created') {
+                    setError('Success! You are now being logged in.')
+                    localStorage.setItem('loggedIn', 'true')
+                    localStorage.setItem('id', create.newUser.id.toString())
+                    localStorage.setItem('name', create.newUser.name)
+                    localStorage.removeItem('guestId')
+                    setTimeout(() => {
+                        props.methods[1]()
+                        setRenderCars(true)
+                    }, 1500)
+                } else {
+                    setError(create.response)
+                }
+            } catch(er) {setError(er)}
+        } else {
+            setError('Not a valid email')
+        }
     }
 
     return (

@@ -23,19 +23,36 @@ router.get('/:id', async(req, res, next) => {
     } catch(er) {next(er)}
 })
 
+const validateEmail = (email) => {
+    const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return reg.test(email.toString().toLowerCase())
+}
 // route to login user
 router.post('/login', async(req, res, next) => {
-    try {
-        const {username, password} = req.body
-        const user = await Users.findAll({where: {username: username}})
-        if (user.length === 0) res.send({result: 'Username Not Found'})
-        const check = await bcrypt.compare(password, user[0].password)
-        if (check) {
-            res.send({result: 'login-succesful', user: user[0]})
-        } else {
-            res.send({result: 'Password Incorrect'})
-        }
-    } catch(er) {next(er)}
+    const {username, password} = req.body
+    if (validateEmail(username)) {
+        try {
+            const user = await Users.findAll({where: {email: username}})
+            if (user.length === 0) res.send({result: 'Username Not Found'})
+            const check = await bcrypt.compare(password, user[0].password)
+            if (check) {
+                res.send({result: 'login-succesful', user: user[0]})
+            } else {
+                res.send({result: 'Password Incorrect'})
+            }
+        } catch(er) {next(er)}
+    } else {
+        try {
+            const user = await Users.findAll({where: {username: username}})
+            if (user.length === 0) res.send({result: 'Username Not Found'})
+            const check = await bcrypt.compare(password, user[0].password)
+            if (check) {
+                res.send({result: 'login-succesful', user: user[0]})
+            } else {
+                res.send({result: 'Password Incorrect'})
+            }
+        } catch(er) {next(er)}
+    }
 })
 
 const urlCheck = (url) => {

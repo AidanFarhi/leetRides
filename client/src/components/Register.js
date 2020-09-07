@@ -36,12 +36,15 @@ export default function Register(props) {
             })
             const create = await response.json()
             if (create.response === 'user-created') {
+                setError('Success! You are now being logged in.')
                 localStorage.setItem('loggedIn', 'true')
                 localStorage.setItem('id', create.newUser.id.toString())
                 localStorage.setItem('name', create.newUser.name)
                 localStorage.removeItem('guestId')
-                props.methods[1]()
-                setRenderCars(true)
+                setTimeout(() => {
+                    props.methods[1]()
+                    setRenderCars(true)
+                }, 1500)
             } else {
                 setError(create.response)
             }

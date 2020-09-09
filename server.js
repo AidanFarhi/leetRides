@@ -24,7 +24,7 @@ const init = async() => {
 init()
 
 app.use(express.static(path.join(__dirname, 'client/build')));
-app.use('/search', require('./routes/itemRoutes'))
+app.use('/search', require('./routes/searchRoutes'))
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/car/cart', require('./routes/cartRoutes'))

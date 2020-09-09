@@ -9,7 +9,7 @@ export default function Results() {
 
     const getData = async() => {
         try {
-            const response = await fetch(`find/find/${query}`)
+            const response = await fetch(`/search/${query}`)
             const data = await response.json()
             const divs = data.map((car, i) => {
                 return (

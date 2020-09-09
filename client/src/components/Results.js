@@ -28,6 +28,7 @@ export default function Results() {
     }
     
     useEffect(()=> {
+        console.log('fired')
         getData()
     },[])
 

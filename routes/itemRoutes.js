@@ -34,7 +34,7 @@ router.get('/find/:query', async(req, res, next) => {
         const foundCars = await Items.findAll({
             where: {
                 name: {
-                    [Op.iLike]: '%' + req.params.query + '%'
+                    [Op.iLike]: req.params.query
                 }
             }
         })

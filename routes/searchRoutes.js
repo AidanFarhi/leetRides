@@ -6,6 +6,7 @@ const router = new Router()
 
 // route for searching for items by name
 router.get('/:query', async(req, res, next) => {
+    console.log('fired back end')
     try {
         const foundCars = await Items.findAll({
             where: {

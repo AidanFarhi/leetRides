@@ -8,8 +8,9 @@ export default function Results() {
     const {query} = useParams()
 
     const getData = async() => {
+        console.log('getData')
         try {
-            const response = await fetch(`/search/${query}`)
+            const response = await fetch(`/find/${query}`)
             const data = await response.json()
             const divs = data.map((car, i) => {
                 return (
@@ -28,8 +29,9 @@ export default function Results() {
     }
     
     useEffect(()=> {
+        console.log('fired')
         getData()
-    },[loading === true])
+    },[])
 
     return (
         <div className='cars-main-div'>

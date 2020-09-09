@@ -10,8 +10,6 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-// const models = require('./models')
-const PORT = 4000
 const init = async() => {
     try {
         console.log('nothing to update')

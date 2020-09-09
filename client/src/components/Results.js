@@ -28,11 +28,9 @@ export default function Results() {
     }
     
     useEffect(()=> {
-        console.log('fired')
         getData()
-    },[])
+    },[loading === true])
 
-    console.log(itemDivs)
     return (
         <div className='cars-main-div'>
             {loading ? <h2>Finding cars...</h2> : null}

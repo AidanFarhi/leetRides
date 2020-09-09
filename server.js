@@ -22,14 +22,7 @@ const init = async() => {
 
 init()
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-}    
-const path = require('path')
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/search', require('./routes/itemRoutes'))
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))
@@ -43,7 +36,9 @@ app.use('/guestOrder', require('./routes/guestOrderRoutes'))
 app.use('/car/guest', require('./routes/guestRoutes'))
 app.use('/guest', require('./routes/guestRoutes'))
 app.use('/key', require('./routes/serveKeys'))
-
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // Error catching endware
 app.use((err, req, res, next) => {

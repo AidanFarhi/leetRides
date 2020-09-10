@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import '../cmp-styles/Cart.css'
 
-export default function Cart() {
+export default function Cart(props) {
+    // props.method === takeAwayFromCart()
     const [state, setState] = useState({
         cars: [],
         total: 0,
@@ -21,6 +22,8 @@ export default function Cart() {
     }
 
     const removeItem = async(id) => {
+        // takeAwayFromCart()
+        props.method()
         if (localStorage.getItem('id') === null) {
             removeItemGuest(id)
             return
@@ -75,33 +78,32 @@ export default function Cart() {
                     total: 0
                 })
             }
-            const totalCost = prices.reduce(reducer)
-            setState({
-                cars: data.map((car, i) => {
-                    return(
-                        <div className='cart-item' key={i}>
-                            <img src={car.imageUrl} alt='a nice car'></img>
-                            <Link key={i} to={{pathname:`/car/${car.id}`}}><h3>{car.name}</h3></Link>
-                            <p>${car.price}.00</p>
-                            <button onClick={()=> removeItem(car.id)}>Delete</button>
-                        </div>
-                    )
-                }),
-                total: totalCost
-            })
+            if (prices.length > 0) {
+                const totalCost = prices.reduce(reducer)
+                setState({
+                    cars: data.map((car, i) => {
+                        return(
+                            <div className='cart-item' key={i}>
+                                <img src={car.imageUrl} alt='a nice car'></img>
+                                <Link key={i} to={{pathname:`/car/${car.id}`}}><h3>{car.name}</h3></Link>
+                                <p>${car.price}.00</p>
+                                <button onClick={()=> removeItem(car.id)}>Delete</button>
+                            </div>
+                        )
+                    }),
+                    total: totalCost
+                })
+            }
         } catch(er) {console.log(er)}
     }
     
     useEffect(()=> {
         if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
             getData()
-            return
         } else if (localStorage.getItem('guestId') === null) {
             getData()
-            return
         } else {
             getDataGuest()
-            return
         }
     },[])
 

@@ -21,11 +21,12 @@ const init = async() => {
 
 init()
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+// app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/find', require('./routes/searchRoutes'))
 app.use('/items', require('./routes/itemRoutes'))
 app.use('/users', require('./routes/userRoutes'))
 app.use('/car/cart', require('./routes/cartRoutes'))
+app.use('/search/cart', require('./routes/cartRoutes'))
 app.use('/cart', require('./routes/cartRoutes'))
 app.use('/order', require('./routes/orderRoutes'))
 app.use('/pay', require('./routes/paymentRoutes'))
@@ -35,9 +36,9 @@ app.use('/guestOrder', require('./routes/guestOrderRoutes'))
 app.use('/car/guest', require('./routes/guestRoutes'))
 app.use('/guest', require('./routes/guestRoutes'))
 app.use('/key', require('./routes/serveKeys'))
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 
 // Error catching endware
 app.use((err, req, res, next) => {

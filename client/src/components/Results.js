@@ -8,7 +8,6 @@ export default function Results() {
     const {query} = useParams()
 
     const getData = async() => {
-        console.log('getData')
         try {
             const response = await fetch(`/find/${query}`)
             const data = await response.json()
@@ -29,7 +28,6 @@ export default function Results() {
     }
     
     useEffect(()=> {
-        console.log('fired')
         getData()
     },[])
 

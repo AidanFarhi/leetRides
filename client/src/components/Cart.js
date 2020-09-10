@@ -95,13 +95,10 @@ export default function Cart() {
     useEffect(()=> {
         if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
             getData()
-            return
         } else if (localStorage.getItem('guestId') === null) {
             getData()
-            return
         } else {
             getDataGuest()
-            return
         }
     },[])
 

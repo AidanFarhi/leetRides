@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './cmp-styles/App.css';
 import Home from './components/Home'
 import {Elements} from '@stripe/react-stripe-js';

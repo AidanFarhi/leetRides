@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {Redirect} from 'react-router-dom'
 import '../cmp-styles/Login.css'
 
 export default function Login(props) {
@@ -33,7 +32,7 @@ export default function Login(props) {
                 localStorage.setItem('name', login.user.name)
                 localStorage.removeItem('guestId')
                 setTimeout(() => {
-                    props.methods[0]()
+                    props.methods[0](login.user.id)
                 }, 700)
             } else {
                 setError(login.result)

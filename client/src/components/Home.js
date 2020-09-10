@@ -4,58 +4,67 @@ import '../cmp-styles/NavBar.css'
 import {NavBar} from '../components'
 import Routes from '../Routes'
 
-export default function Home() {
-    const [cartCount, setCartCount] = useState(0)
-
-    const addToCart = () => setCartCount(cartCount + 1)
-    const takeAwayFromCart = () => {
-        console.log('item deleted')
-        if (cartCount === 1) {
-            setCartCount(0)
-        } else {
-            setCartCount(cartCount - 1)
+export default class Home extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            cartCount: 0,
+            methods: [
+                this.addToCart,
+                this.takeAwayFromCart
+            ]
         }
-    }    
-    
-    // these are passed to the <Routes/> component
-    const methods = [addToCart, takeAwayFromCart]
+    }
 
-    const getDataGuest = async() => {
+    addToCart = () =>  {
+        this.setState({   
+            cartCount: this.state.cartCount + 1
+        })
+    }
+    takeAwayFromCart = () => {
+        this.setState({
+            cartCount: this.state.cartCount - 1
+        })
+    }
+    getDataGuest = async() => {
         try {
             const response = await fetch(`guestCart/${localStorage.getItem('guestId')}`)
             const data = await response.json()
-            setCartCount(data.length)
+            this.setState({
+                cartCount: data.length
+            })
         } catch(er) {console.log(er)}
     }
-    const getData = async() => {
-        console.log('gotData home')
+    getData = async() => {
         try {
             const response = await fetch(`cart/${localStorage.getItem('id')}`)
             const data = await response.json()
-            setCartCount(data.length)
+            this.setState({
+                cartCount: data.length
+            })
         } catch(er) {console.log(er)}
     }
     
-    useEffect(()=> {
-        console.log('cart count', cartCount)
+    componentDidMount() {
         if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
-            getData()
+            this.getData()
         } else if (localStorage.getItem('guestId') === null) {
-            getData()
+            this.getData()
         } else {
-            getDataGuest()
+            this.getDataGuest()
         }
         if (localStorage.getItem('loggedIn') === undefined || localStorage.getItem('loggedIn') == null) {
             localStorage.setItem('loggedIn', 'false')
         }
-    },[])
+    }
 
-    return(
-        <div id='home-main-div'>
-            <p id='main-home-banner'>Find Your Drive</p>
-            <h1>{cartCount}</h1>
-            <NavBar data={cartCount}/>
-            <Routes methods={methods} />
-        </div>
-    )
+    render() {
+        return(
+            <div id='home-main-div'>
+                <p id='main-home-banner'>Find Your Drive</p>
+                <NavBar data={this.state.cartCount}/>
+                <Routes methods={this.state.methods} />
+            </div>
+        )
+    }
 }

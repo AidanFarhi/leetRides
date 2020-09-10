@@ -5,7 +5,6 @@ import {Login, Register} from '../components'
 import '../cmp-styles/NavBar.css'
 
 export default function NavBar(props) {
-    console.log(props.data)
     const [text, setText] = useState('')
     const [loggedIn, setLoginStatus] = useState(false)
     const [renderResults, setSearchRender] = useState(false)

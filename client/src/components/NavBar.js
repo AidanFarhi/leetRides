@@ -4,33 +4,33 @@ import {Link, Redirect} from 'react-router-dom'
 import {Login, Register} from '../components'
 import '../cmp-styles/NavBar.css'
 
-export default function NavBar() {
-    console.log('NavBar ReRendered')
+export default function NavBar(props) {
+    console.log(props.data)
     const [text, setText] = useState('')
     const [loggedIn, setLoginStatus] = useState(false)
     const [renderResults, setSearchRender] = useState(false)
     const [renderLogin, setLoginRender] = useState(false)
     const [renderHome, setRenderHome] = useState(false)
     const [renderRegister, setRegisterRender] = useState(false)
-    const [cartCount, setCartCount] = useState(0)
-    const [userId, setUserId] = useState(localStorage.getItem('id') || null)
+    // const [cartCount, setCartCount] = useState(0)
+    // const [userId, setUserId] = useState(localStorage.getItem('id') || null)
 
-    const getDataGuest = async() => {
-        try {
-            const response = await fetch(`guestCart/${localStorage.getItem('guestId')}`)
-            const data = await response.json()
-            setCartCount(data.length)
-        } catch(er) {console.log(er)}
-    }
+    // const getDataGuest = async() => {
+    //     try {
+    //         const response = await fetch(`guestCart/${localStorage.getItem('guestId')}`)
+    //         const data = await response.json()
+    //         setCartCount(data.length)
+    //     } catch(er) {console.log(er)}
+    // }
 
-    const getData = async() => {
-        try {
-            // const response = await fetch(`cart/${localStorage.getItem('id')}`)
-            const response = await fetch(`cart/${userId}`)
-            const data = await response.json()
-            setCartCount(data.length)
-        } catch(er) {console.log(er)}
-    }
+    // const getData = async() => {
+    //     try {
+    //         // const response = await fetch(`cart/${localStorage.getItem('id')}`)
+    //         const response = await fetch(`cart/${userId}`)
+    //         const data = await response.json()
+    //         setCartCount(data.length)
+    //     } catch(er) {console.log(er)}
+    // }
 
     const handleChange = (event) => {
         setText(event.target.value)
@@ -61,7 +61,7 @@ export default function NavBar() {
     }
     // these methods get passed to <Login/> component
     const login = (id) => {
-        setUserId(id)
+        // setUserId(id)
         setLoginStatus(true)
         setLoginRender(false)
         setRegisterRender(false)
@@ -85,13 +85,13 @@ export default function NavBar() {
     const registerMethods = [closeRegister, login]
 
     useEffect(()=> {
-        if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
-            getData()
-        } else if (localStorage.getItem('guestId') === null) {
-            getData()
-        } else {
-            getDataGuest()
-        }
+        // if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
+        //     getData()
+        // } else if (localStorage.getItem('guestId') === null) {
+        //     getData()
+        // } else {
+        //     getDataGuest()
+        // }
         if (renderHome) setRenderHome(false)
         if (localStorage.getItem('loggedIn') === 'true') {
             setLoginStatus(true)
@@ -116,7 +116,7 @@ export default function NavBar() {
             <Link to='/drivers' id='drivers'></Link>
             <div id='cart-div'>
                 <Link to='/cart' id='cart'></Link>
-                <span id='cart-count'>{cartCount}</span>
+                <span id='cart-count'>{props.data}</span>
             </div>
             {loggedIn ? 
                 <button id='logout' onClick={logout}>logout</button> 

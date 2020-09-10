@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import '../cmp-styles/SingleItem.css'
 
 export default function SingleItem(props) {
+    // props.method === addToCart()
     const [state, setState] = useState({
         carData: {},
     })
@@ -14,6 +15,8 @@ export default function SingleItem(props) {
     // check local storage to see if guest is logged in or not
     // if so, then post to guest cart   
     const addItem = async() => {
+        // addToCart()
+        props.method()
         clickAnimation()
         if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
             addItemGuest()
@@ -27,7 +30,6 @@ export default function SingleItem(props) {
                 body: JSON.stringify({userId: localStorage.getItem('id'), itemId: id})
             })
             const result = await response.json()
-            console.log(result)
         } catch(er) {console.log(er)}
     }
 

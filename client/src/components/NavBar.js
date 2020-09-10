@@ -11,25 +11,6 @@ export default function NavBar(props) {
     const [renderLogin, setLoginRender] = useState(false)
     const [renderHome, setRenderHome] = useState(false)
     const [renderRegister, setRegisterRender] = useState(false)
-    // const [cartCount, setCartCount] = useState(0)
-    // const [userId, setUserId] = useState(localStorage.getItem('id') || null)
-
-    // const getDataGuest = async() => {
-    //     try {
-    //         const response = await fetch(`guestCart/${localStorage.getItem('guestId')}`)
-    //         const data = await response.json()
-    //         setCartCount(data.length)
-    //     } catch(er) {console.log(er)}
-    // }
-
-    // const getData = async() => {
-    //     try {
-    //         // const response = await fetch(`cart/${localStorage.getItem('id')}`)
-    //         const response = await fetch(`cart/${userId}`)
-    //         const data = await response.json()
-    //         setCartCount(data.length)
-    //     } catch(er) {console.log(er)}
-    // }
 
     const handleChange = (event) => {
         setText(event.target.value)
@@ -84,13 +65,6 @@ export default function NavBar(props) {
     const registerMethods = [closeRegister, login]
 
     useEffect(()=> {
-        // if (localStorage.getItem('guestId') === null && localStorage.getItem('id') === null) {
-        //     getData()
-        // } else if (localStorage.getItem('guestId') === null) {
-        //     getData()
-        // } else {
-        //     getDataGuest()
-        // }
         if (renderHome) setRenderHome(false)
         if (localStorage.getItem('loggedIn') === 'true') {
             setLoginStatus(true)

@@ -9,6 +9,7 @@ export default function OrderSummary(props) {
             <h2>Total: ${props.data.total}00.00</h2>
             <h2>Shipping To: {props.data.address}</h2>
             <h2>Estimated Arrival: 5-7 business days</h2>
+            <p>Thank you for shopping with us!</p>
         </div>
     )
 }

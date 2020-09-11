@@ -84,7 +84,7 @@ button:focus {
 @media screen and (min-width: 768px)
 and (max-width: 1023px) {
     .single-car-div {
-        padding-top: 25%;
+        padding-top: 20%;
         flex-direction: column;
     }
 }

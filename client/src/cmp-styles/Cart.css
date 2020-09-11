@@ -87,3 +87,30 @@
     -moz-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
     box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
 }
+
+/* Mobile Responsive */
+
+/* Tablet Section */
+@media screen and (min-width: 768px)
+and (max-width: 1023px) {
+    #cart-main-div {
+        padding-top: 20%;
+    }
+    #cart-header {
+        position: fixed;
+        top: 13%;
+        left: 42.5%;
+        color: rgb(223, 223, 223);
+        opacity: .7;
+    }
+    .cart-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+        height: 40%;
+        padding-top: 5%;
+    }
+}
+
+/* Phone Section */

@@ -218,3 +218,77 @@ and (max-width: 1024px) {
 }
 
 /* Phone Section */
+@media screen and (max-width:767px) {
+    #leetrides-header {
+        font-size: 15px;
+    }
+    #header-link {
+        text-decoration: none;
+        position: fixed;
+        left: 8px;
+        top: 32px;
+    }
+    #search-form {
+        display: flex;
+        flex-direction: row;
+        margin-left: 25%;
+    }
+    #search-input {
+        width: 160px;
+        margin-top: 12%;
+    }
+    #search {
+        margin-top: 15%;
+        margin-left: 5%;
+    }
+    .nav-main-div>img {
+        display: block;
+        position: fixed;
+        width: 25px;
+        height: 25px;
+        right: 5%;
+        top: 4%;
+    }
+    #burger-menu-checkbox {
+        opacity: 0;
+        z-index: 2;
+        position: fixed;
+        width: 40px;
+        height: 35px;
+        right: 4%;
+        top: 2%;
+    }
+    .links-div {
+        display: none;
+    }
+    #cart-count {
+        position: absolute;
+        right: 48.5%;
+        top: 50%;
+        font-size: 12px;
+        font-family: sans-serif;
+    }
+
+    /* when input is checked */
+    #burger-menu-checkbox:checked ~ .links-div {
+        position: fixed;
+        right: 0;
+        top: 10%;
+        padding: 20px;
+        padding-left: 35px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: space-between;
+        background-color: #161616;
+        border-radius: 3px;
+        -webkit-box-shadow: 0px 22px 21px 0px rgba(255,5,5,0.29);
+        -moz-box-shadow: 0px 22px 21px 0px rgba(255,5,5,0.29);
+        box-shadow: 0px 22px 21px 0px rgba(255,5,5,0.29);
+    }
+    
+    #burger-menu-checkbox:checked ~ img {
+        transform: rotate(90deg);
+    }
+
+}    

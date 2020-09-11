@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Login, Register} from '../components'
+import menu from '../cmp-styles/icons/menu.png'
 import '../cmp-styles/NavBar.css'
 
 export default function NavBar(props) {
@@ -73,6 +74,7 @@ export default function NavBar(props) {
 
     return (
         <div className='nav-main-div'>
+
             <div id='cover'></div>
             <Link id='header-link' to='/'><h1>LeetRides</h1></Link>
             <form id='search-form' onSubmit={search}>
@@ -84,23 +86,27 @@ export default function NavBar(props) {
                     />
                 <button id='search' type='submit'></button>
             </form>
+
+            <input type='checkbox' id='burger-menu-checkbox'/>
+            <img src={menu} id='buger-menu'></img>
             <div className='links-div'>
-            <Link to='/cars' id='cars'></Link>
-            <Link to='/drivers' id='drivers'></Link>
-            <div id='cart-div'>
-                <Link to='/cart' id='cart'></Link>
-                <span id='cart-count'>{props.data}</span>
+                <Link to='/cars' id='cars'></Link>
+                <Link to='/drivers' id='drivers'></Link>
+                <div id='cart-div'>
+                    <Link to='/cart' id='cart'></Link>
+                    <span id='cart-count'>{props.data}</span>
+                </div>
+                {loggedIn ? 
+                    <button id='logout' onClick={logout}>logout</button> 
+                    :
+                    <button id='login' onClick={triggerLoginRender}>login</button>
+                }
             </div>
-            {loggedIn ? 
-                <button id='logout' onClick={logout}>logout</button> 
-                :
-                <button id='login' onClick={triggerLoginRender}>login</button>
-            }
+
             {renderResults ? <Redirect to={`/search/${text}`} /> : null}
             {renderLogin ? <Login methods={loginMethods}/> : null}
             {renderHome ? <Redirect to='/' /> : null}
             {renderRegister ? <Register methods={registerMethods} /> : null}
-            </div>
         </div>
     )
 }

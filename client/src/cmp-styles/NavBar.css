@@ -151,6 +151,7 @@ a:hover {
 
 .nav-main-div>img, #buger-menu-checkbox {
     display: none;
+    transition: all .4s ease;
 }
 
 /* Mobile Responsive */

@@ -1,6 +1,6 @@
 #register-form-div {
     position: fixed;
-    z-index: 5;
+    z-index: 6;
     width:45%;
     height: 56%;
     left: 27%;
@@ -81,7 +81,7 @@
 @media screen and (max-width: 767px) {
     #register-form-div {
         position: fixed;
-        z-index: 1;
+        z-index: 6;
         width: 80%;
         height: 70%;
         left: 10%;

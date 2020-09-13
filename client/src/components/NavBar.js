@@ -80,7 +80,7 @@ export default function NavBar(props) {
         <div className='nav-main-div'>
 
             <div id='cover'></div>
-            <Link id='header-link' to='/'><h1 id='leetrides-header'>LeetRides</h1></Link>
+            <Link onClick={closeTab} id='header-link' to='/'><h1 id='leetrides-header'>LeetRides</h1></Link>
             <form id='search-form' onSubmit={search}>
                 <input id='search-input' type='text' 
                     placeholder='Find your ride..' 

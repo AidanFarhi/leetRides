@@ -62,4 +62,21 @@ and (max-width: 1023px) {
 }
 
 /* Phone Section */
-
+@media screen and (max-width:767px) {
+    #single-user-main-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 35%;
+        padding-bottom: 10%;
+    }
+    #user-image {
+        height: 120px;
+        width: 120px;
+    }
+    .car-order-image {
+        height: 120px;
+        width: 180px;
+        padding: 10px;
+    }
+}

@@ -91,6 +91,10 @@ h1 {
     transition: all .15s ease;
 }
 
+input[type=checkbox] {
+    display: none;
+}
+
 /* Icons on the right */
 
 a {
@@ -159,7 +163,7 @@ a:hover {
 
 /* Tablet Section */
 @media screen and (min-width: 768px)
-and (max-width: 1024px) {
+and (max-width: 1400px) {
     .nav-main-div>img {
         display: block;
         position: fixed;
@@ -169,6 +173,7 @@ and (max-width: 1024px) {
         top: 2.5%;
     }
     #burger-menu-checkbox {
+        display: block;
         opacity: 0;
         z-index: 2;
         position: fixed;
@@ -251,6 +256,7 @@ and (max-width: 1024px) {
         top: 4%;
     }
     #burger-menu-checkbox {
+        display: block;
         opacity: 0;
         z-index: 2;
         position: fixed;

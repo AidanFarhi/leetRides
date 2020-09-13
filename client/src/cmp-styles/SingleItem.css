@@ -77,3 +77,28 @@ button:focus {
         opacity: 1
     }
 }
+
+/* Mobile Responsive */
+
+/* Tablet Section */
+@media screen and (min-width: 768px)
+and (max-width: 1023px) {
+    .single-car-div {
+        padding-top: 20%;
+        flex-direction: column;
+    }
+}
+
+/* Phone Section */
+
+@media screen and (max-width:767px) {
+    .single-car-div {
+        padding-top: 35%;
+        padding-bottom: 15%;
+        flex-direction: column;
+    }
+    #car-image {
+        height: 200px;
+        width: 250px;
+    }
+}

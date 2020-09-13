@@ -38,3 +38,33 @@ li {
     -moz-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
     box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
 }
+
+/* Mobile Responsive */
+
+/* Tablet Section */
+@media screen and (min-width: 768px)
+and (max-width: 1023px) {
+    #main-checkout-div {
+        padding-top: 20%;
+    }
+    li {
+        padding: 20px;
+    }
+}
+
+/* Phone Section */
+
+@media screen and (max-width:767px) {
+    #checkout-header {
+        width: 50%;
+        border-bottom: 1px solid whitesmoke;
+        padding-bottom: 2%;
+    }
+    #main-checkout-div {
+        padding-top: 30%;
+        padding-bottom: 20%;
+    }
+    li {
+        padding: 40px;
+    }
+}

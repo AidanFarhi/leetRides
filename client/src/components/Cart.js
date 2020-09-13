@@ -117,7 +117,6 @@ export default function Cart(props) {
             </div>
             }
             {state.total === 0 ? null : <Link id='checkout-link' to='/checkout'>Checkout</Link>}
-            
         </div>
     )
 }

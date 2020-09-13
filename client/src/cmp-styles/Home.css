@@ -17,3 +17,37 @@ body {
     opacity: .2;
     font-size: 250%;
 }
+
+/* Mobile Responsive */
+
+/* Tablet Section */
+@media screen and (min-width: 768px)
+and (max-width: 1023px) {
+    body{
+        background-size: cover;
+    }
+    #main-home-banner {
+        z-index: -1;
+        top: 68.5%;
+        left: 35%;
+        position: fixed;
+        opacity: .2;
+        font-size: 250%;
+    }
+}
+
+/* Phone Section */
+
+@media screen and (max-width:767px) {
+    body{
+        background-size: cover;
+    }
+    #main-home-banner {
+        z-index: -1;
+        top: 80%;
+        left: 25%;
+        position: fixed;
+        opacity: .2;
+        font-size: 200%;
+    }
+}

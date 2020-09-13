@@ -37,3 +37,38 @@
     color: grey;
     transition: all .3s ease;
 }
+
+/* Mobile Responsive */
+
+/* Tablet Section */
+@media screen and (min-width: 768px)
+and (max-width: 1023px) {
+    #user-main-div {
+        padding-top: 18%;
+        padding-bottom: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .user-div>img {
+        height: 120px;
+        width: 120px;
+        border-radius: 50%;
+    }
+}
+
+/* Phone Section */
+@media screen and (max-width:767px) {
+    #user-main-div {
+        padding-top: 30%;
+        padding-bottom: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .user-div>img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+}

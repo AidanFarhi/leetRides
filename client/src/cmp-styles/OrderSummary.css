@@ -1,21 +1,31 @@
 #order-summary-main-div>h2 {
     margin: 0;
     padding-top: 5%;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+h1 {
+    margin: 0;
+}
+
 #order-summary-main-div {
     background-color: #161616;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: center;
     position: fixed;
     opacity: .9;
     height: 60%;
-    width: 40%;
-    left: 30%;
+    width: 60%;
+    left: 19%;
     top: 15%;
     border-radius: 3px;
-    padding-top: 10%;
+    padding-top: 5%;
     padding-left: 3%;
     padding-right: 3%;
     -webkit-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
@@ -23,3 +33,49 @@
     box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
 }
 
+/* Mobile Responsive */
+
+/* Tablet Section */
+@media screen and (min-width: 768px)
+and (max-width: 1023px) {
+    #order-summary-main-div {
+        background-color: #161616;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        align-items: center;
+        position: fixed;
+        opacity: .9;
+        height: 60%;
+        width: 80%;
+        left: 7.5%;
+        top: 15%;
+        border-radius: 3px;
+        padding-top: 10%;
+        padding-left: 3%;
+        padding-right: 3%;
+        -webkit-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
+        -moz-box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
+        box-shadow: 0px 0px 21px 0px rgba(255,5,5,0.59);
+
+    }
+    h1 {
+        margin: 0;
+    }
+    #order-summary-main-div>h2 {
+        padding-bottom: 20px;
+    }
+}
+
+/* Phone Section */
+@media screen and (max-width:767px) {
+    #order-summary-main-div {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        align-items: center;
+        margin-top: 10%;
+        font-size: 75%;
+        height: 65%;
+    }
+}

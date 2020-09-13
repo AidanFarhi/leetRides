@@ -13,6 +13,7 @@ h1 {
 
 #order-summary-main-div {
     background-color: #161616;
+    z-index: -1;
     display: flex;
     flex-direction: column;
     align-content: space-between;

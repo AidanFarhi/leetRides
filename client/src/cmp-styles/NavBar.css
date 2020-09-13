@@ -271,6 +271,7 @@ and (max-width: 1024px) {
 
     /* when input is checked */
     #burger-menu-checkbox:checked ~ .links-div {
+        z-index: 4;
         position: fixed;
         right: 0;
         top: 9.5%;

@@ -68,3 +68,38 @@ and (max-width: 1023px) {
 }
 
 /* Phone Section */
+
+@media screen and (max-width: 767px) {
+    #payment-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40%;
+    }
+    .StripeElement {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 30%;
+    }
+    .__PrivateStripeElement {
+        /* display: flex;
+        flex-wrap: wrap;
+        flex-direction: column; */
+        position: fixed;
+        left: 40px;
+        margin-left: 50%;
+        height: 50%;
+        width: 250%;
+    }
+    #payment-form>button {
+        padding: 20px;
+        margin-top: 35px;
+    }
+    
+    /* .__PrivateStripeElement>input {
+        display: flex;
+        flex-direction: column;
+    } */
+    
+}

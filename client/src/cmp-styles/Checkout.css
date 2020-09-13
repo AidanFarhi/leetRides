@@ -53,3 +53,17 @@ and (max-width: 1023px) {
 }
 
 /* Phone Section */
+
+@media screen and (max-width:767px) {
+    #checkout-header {
+        width: 50%;
+        border-bottom: 1px solid whitesmoke;
+        padding-bottom: 2%;
+    }
+    #main-checkout-div {
+        padding-top: 30%;
+    }
+    li {
+        padding: 40px;
+    }
+}

@@ -30,6 +30,7 @@ export default function NavBar(props) {
         setRenderHome(true)
     }
     const triggerLoginRender = () => {
+        closeTab()
         cover()
         setLoginRender(true)
         setRenderHome(true)
@@ -39,6 +40,9 @@ export default function NavBar(props) {
     }
     const uncover = () => {
         document.getElementById('cover').style.display = 'none' 
+    }
+    const closeTab = () => {
+        document.getElementById('burger-menu-checkbox').checked = false
     }
     // these methods get passed to <Login/> component
     const login = (id) => {
@@ -90,10 +94,10 @@ export default function NavBar(props) {
             <input type='checkbox' id='burger-menu-checkbox'/>
             <img src={menu} id='buger-menu'></img>
             <div className='links-div'>
-                <Link to='/cars' id='cars'></Link>
-                <Link to='/drivers' id='drivers'></Link>
+                <Link onClick={closeTab} to='/cars' id='cars'></Link>
+                <Link onClick={closeTab} to='/drivers' id='drivers'></Link>
                 <div id='cart-div'>
-                    <Link to='/cart' id='cart'></Link>
+                    <Link onClick={closeTab} to='/cart' id='cart'></Link>
                     <span id='cart-count'>{props.data}</span>
                 </div>
                 {loggedIn ? 

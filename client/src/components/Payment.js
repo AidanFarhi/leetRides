@@ -4,7 +4,8 @@ import OrderSummary from './OrderSummary'
 import CardSection from './CardSection';
 import '../cmp-styles/Payment.css'
 
-export default function Payment() {
+export default function Payment(props) {
+    // props.method === emptyCart()
     const elements = useElements();
     const [error, setError] = useState(null)
     const [clientSecret, setClientSecret] = useState('');
@@ -124,6 +125,7 @@ export default function Payment() {
                         })
                         const result = await makeOrder.json()
                         if (result.response === 'order-placed') {
+                            props.method()
                             setOrderSummary(result.order)
                             setSuccess({processed: true})
                         }
@@ -137,6 +139,7 @@ export default function Payment() {
                         })
                         const result = await makeOrder.json()
                         if (result.response === 'order-placed') {
+                            props.method()
                             setOrderSummary(result.order)
                             setSuccess({processed: true})
                         }

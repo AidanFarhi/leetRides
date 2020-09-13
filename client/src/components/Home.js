@@ -11,11 +11,18 @@ export default class Home extends React.Component {
             cartCount: 0,
             methods: [
                 this.addToCart,
-                this.takeAwayFromCart
+                this.takeAwayFromCart,
+                this.emptyCart
             ]
         }
     }
 
+    // cart methods
+    emptyCart = () => {
+        this.setState({
+            cartCount: 0
+        })
+    }
     addToCart = () =>  {
         this.setState({   
             cartCount: this.state.cartCount + 1
@@ -26,6 +33,8 @@ export default class Home extends React.Component {
             cartCount: this.state.cartCount - 1
         })
     }
+
+    // fetch cart data methods
     getDataGuest = async() => {
         try {
             const response = await fetch(`guestCart/${localStorage.getItem('guestId')}`)

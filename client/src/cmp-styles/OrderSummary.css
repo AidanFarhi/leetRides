@@ -68,3 +68,14 @@ and (max-width: 1023px) {
 }
 
 /* Phone Section */
+@media screen and (max-width:767px) {
+    #order-summary-main-div {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        align-items: center;
+        margin-top: 10%;
+        font-size: 75%;
+        height: 65%;
+    }
+}

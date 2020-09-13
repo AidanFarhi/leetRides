@@ -300,3 +300,11 @@ and (max-width: 1400px) {
     }
 
 }    
+/* small phone */
+@media screen and (max-width:374px) {
+    #burger-menu-checkbox ~ img{
+        top: 5%;
+        width: 20px;
+        height: 20px;
+    }
+}

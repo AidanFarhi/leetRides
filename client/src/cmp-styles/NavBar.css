@@ -244,11 +244,9 @@ and (max-width: 1400px) {
         margin-top: 12%;
     }
     #search {
-        margin-top: 15%;
+        margin-top: 16%;
         margin-left: 5%;
         background-image: url('./icons/search-small.png');
-        height: 24px;
-        width: 24px;
     }
     .nav-main-div>img {
         display: block;
@@ -311,10 +309,8 @@ and (max-width: 1400px) {
         height: 20px;
     }
     #search {
-        margin-top: 15%;
+        margin-top: 16%;
         margin-left: 5%;
         background-image: url('./icons/search-small.png');
-        height: 24px;
-        width: 24px;
     }
 }

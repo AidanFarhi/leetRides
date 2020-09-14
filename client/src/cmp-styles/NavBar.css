@@ -246,6 +246,8 @@ and (max-width: 1400px) {
     #search {
         margin-top: 15%;
         margin-left: 5%;
+        height: 20px;
+        width: 20px;
     }
     .nav-main-div>img {
         display: block;
@@ -306,5 +308,11 @@ and (max-width: 1400px) {
         top: 5%;
         width: 20px;
         height: 20px;
+    }
+    #search {
+        margin-top: 15%;
+        margin-left: 5%;
+        height: 19px;
+        width: 19px;
     }
 }

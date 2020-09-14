@@ -246,9 +246,9 @@ and (max-width: 1400px) {
     #search {
         margin-top: 15%;
         margin-left: 5%;
-        background-size: cover;
-        height: 28px;
-        width: 28px;
+        background-image: url('./icons/search-small.png');
+        height: 24px;
+        width: 24px;
     }
     .nav-main-div>img {
         display: block;
@@ -313,8 +313,8 @@ and (max-width: 1400px) {
     #search {
         margin-top: 15%;
         margin-left: 5%;
-        background-size: cover;
-        height: 26px;
-        width: 26px;
+        background-image: url('./icons/search-small.png');
+        height: 24px;
+        width: 24px;
     }
 }

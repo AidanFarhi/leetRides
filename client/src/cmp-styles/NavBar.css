@@ -246,6 +246,7 @@ and (max-width: 1400px) {
     #search {
         margin-top: 15%;
         margin-left: 5%;
+        background-size: cover;
         height: 28px;
         width: 28px;
     }

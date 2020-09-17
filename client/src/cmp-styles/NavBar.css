@@ -37,18 +37,52 @@ h1 {
     opacity:0.5;
 }
 
-.links-div {
-    display: flex;
-    flex-direction: row;
-    margin-top: 2%;
-    margin-left: 15%;
+.nav-main-div>img {
+    position: fixed;
+    top: 3%;
+    right: 5%;
+    height: 35px;
+    width: 35px;
 }
 
-.links-div>a:active {
+#links-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: #161616; 
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 10%;
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+#close-button {
+    position: absolute;
+    right: 37%;
+    top: 2.5%;
+    background-color: transparent;
+    text-decoration: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+}
+
+#close-button:hover {
+    color: grey;
+    transition: all .2s ease;
+}
+
+#links-div>a:active {
     transform: scale(.8);
 }
 
-.links-div>a:hover {
+#links-div>a:hover {
     color: grey;
 }
 
@@ -84,6 +118,8 @@ h1 {
     background: transparent;
     color: white;
     margin-bottom: 8%;
+    font-size: 1.2rem;
+    font-family: 'Playfair Display', serif;
 }
 
 #logout:hover, #login:hover {
@@ -106,21 +142,15 @@ a:hover {
     transition: all .15s ease;
 }
 
-#cars {
-    background-image: url('./icons/cars.png');
-    display: inline-block;
-    height: 48px;
-    width: 48px;
-    background-repeat:  no-repeat;
+#cars,#drivers {
+    margin: 0;
+    text-decoration: none;
+    font-size: 1.4rem;
+    padding-bottom: 20%;
 }
 
-
-#drivers {
-    background-image: url('./icons/users.png');
-    height: 48px;
-    width: 48px;
-    display: inline-block;
-    background-repeat:  no-repeat;
+#cars,#drivers:visited {
+    color: whitesmoke;
 }
 
 #cart {
@@ -130,13 +160,15 @@ a:hover {
     width: 48px;
     display: inline-block;
     background-repeat:  no-repeat;
+    margin-left: 16%;
+    margin-top: 5%;
 }
 
 #cart-count {
     position: absolute;
-    margin-left: -2.58%;
-    top: 20%;
-    font-size: 15px;
+    right: 48%;
+    top: 26.5%;
+    font-size: 13px;
     font-family: sans-serif;
 }
 
@@ -152,11 +184,6 @@ a:hover {
     width: 24px;
     display: inline-block;
     background-repeat:  no-repeat;
-}
-
-.nav-main-div>img, #buger-menu-checkbox {
-    display: none;
-    transition: all .4s ease;
 }
 
 /* Mobile Responsive */
@@ -189,7 +216,7 @@ and (max-width: 1400px) {
         margin-top: 9%;
         margin-left: 3%;
     }
-    .links-div {
+    #links-div {
         display: none;
     }
     #cart-count {
@@ -201,7 +228,7 @@ and (max-width: 1400px) {
     }
 
     /* when input is checked */
-    #burger-menu-checkbox:checked ~ .links-div {
+    #burger-menu-checkbox:checked ~ #links-div {
         position: fixed;
         right: 0;
         top: 5%;
@@ -266,7 +293,7 @@ and (max-width: 1400px) {
         right: 4%;
         top: 2%;
     }
-    .links-div {
+    #links-div {
         display: none;
     }
     #cart-count {
@@ -278,7 +305,7 @@ and (max-width: 1400px) {
     }
 
     /* when input is checked */
-    #burger-menu-checkbox:checked ~ .links-div {
+    #burger-menu-checkbox:checked ~ #links-div {
         z-index: 4;
         position: fixed;
         right: 0;

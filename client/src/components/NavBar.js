@@ -69,10 +69,17 @@ export default function NavBar(props) {
 
     // navbar methods
     const openMenu = () => {
-        document.getElementById('links-div').style.width = "10%";
+        // handle different screen widths
+        if (window.innerWidth > 1040) {
+            document.getElementById('links-div').style.width = '10%';
+        } else if (window.innerWidth >= 768) {
+            document.getElementById('links-div').style.width = '20%'
+        } else {
+            document.getElementById('links-div').style.width = '100%'
+        }
     }
     const closeMenu = () => {
-        document.getElementById('links-div').style.width = "0";
+        document.getElementById('links-div').style.width = '0';
     }
 
     useEffect(()=> {
@@ -101,11 +108,11 @@ export default function NavBar(props) {
 
             <div id='links-div'>
                 <button id='close-button' onClick={closeMenu}>X</button>
-                <Link onClick={closeMenu} to='/cars' id='cars'>Cars</Link>
-                <Link onClick={closeMenu} to='/drivers' id='drivers'>Drivers</Link>
+                <Link className='nav-link' onClick={closeMenu} to='/cars' id='cars'>Cars</Link>
                 <div id='cart-div'>
-                    <Link onClick={closeMenu} to='/cart' id='cart'></Link>
-                    <span id='cart-count'>{props.data}</span>
+                    <Link className='nav-link' onClick={closeMenu} to='/cart' id='cart'>
+                        <span id='cart-count'>{props.data}</span>
+                    </Link>
                 </div>
                 {loggedIn ? 
                     <button id='logout' onClick={logout}>Logout</button> 

@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import {Login, Register} from '../components'
@@ -30,7 +29,7 @@ export default function NavBar(props) {
         setRenderHome(true)
     }
     const triggerLoginRender = () => {
-        closeTab()
+        closeMenu()
         cover()
         setLoginRender(true)
         setRenderHome(true)
@@ -41,9 +40,7 @@ export default function NavBar(props) {
     const uncover = () => {
         document.getElementById('cover').style.display = 'none' 
     }
-    const closeTab = () => {
-        document.getElementById('burger-menu-checkbox').checked = false
-    }
+
     // these methods get passed to <Login/> component
     const login = (id) => {
         // setUserId(id)
@@ -69,6 +66,21 @@ export default function NavBar(props) {
     }
     const registerMethods = [closeRegister, login]
 
+    // navbar methods
+    const openMenu = () => {
+        // handle different screen widths
+        if (window.innerWidth > 1040) {
+            document.getElementById('links-div').style.width = '10%';
+        } else if (window.innerWidth >= 768) {
+            document.getElementById('links-div').style.width = '20%'
+        } else {
+            document.getElementById('links-div').style.width = '100%'
+        }
+    }
+    const closeMenu = () => {
+        document.getElementById('links-div').style.width = '0';
+    }
+
     useEffect(()=> {
         if (renderHome) setRenderHome(false)
         if (localStorage.getItem('loggedIn') === 'true') {
@@ -80,7 +92,7 @@ export default function NavBar(props) {
         <div className='nav-main-div'>
 
             <div id='cover'></div>
-            <Link onClick={closeTab} id='header-link' to='/'><h1 id='leetrides-header'>LeetRides</h1></Link>
+            <Link onClick={closeMenu} id='header-link' to='/'><h1 id='leetrides-header'>LeetRides</h1></Link>
             <form id='search-form' onSubmit={search}>
                 <input id='search-input' type='text' 
                     placeholder='Find your ride..' 
@@ -91,19 +103,20 @@ export default function NavBar(props) {
                 <button id='search' type='submit'></button>
             </form>
 
-            <input type='checkbox' id='burger-menu-checkbox'/>
-            <img src={menu} id='buger-menu'></img>
-            <div className='links-div'>
-                <Link onClick={closeTab} to='/cars' id='cars'></Link>
-                <Link onClick={closeTab} to='/drivers' id='drivers'></Link>
+            <img src={menu} id='buger-menu' onClick={openMenu}></img>
+
+            <div id='links-div'>
+                <button id='close-button' onClick={closeMenu}>X</button>
+                <Link className='nav-link' onClick={closeMenu} to='/cars' id='cars'>Cars</Link>
                 <div id='cart-div'>
-                    <Link onClick={closeTab} to='/cart' id='cart'></Link>
-                    <span id='cart-count'>{props.data}</span>
+                    <Link className='nav-link' onClick={closeMenu} to='/cart' id='cart'>
+                        <span id='cart-count'>{props.data}</span>
+                    </Link>
                 </div>
                 {loggedIn ? 
-                    <button id='logout' onClick={logout}>logout</button> 
+                    <button id='logout' onClick={logout}>Logout</button> 
                     :
-                    <button id='login' onClick={triggerLoginRender}>login</button>
+                    <button id='login' onClick={triggerLoginRender}>Login</button>
                 }
             </div>
 

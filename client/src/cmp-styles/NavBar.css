@@ -42,6 +42,10 @@ h1 {
     height: 35px;
     width: 35px;
 }
+.nav-main-div>img:hover {
+    opacity: .5;
+    transition: all .2s ease;
+}
 
 #links-div {
     display: flex;

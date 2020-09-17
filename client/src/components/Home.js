@@ -70,7 +70,7 @@ export default class Home extends React.Component {
     render() {
         return(
             <div id='home-main-div'>
-                <p id='main-home-banner'>Find Your Drive</p>
+                {/* <p id='main-home-banner'>Find Your Drive</p> */}
                 <NavBar data={this.state.cartCount}/>
                 <Routes methods={this.state.methods} />
             </div>

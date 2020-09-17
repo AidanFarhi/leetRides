@@ -6,7 +6,8 @@ body {
     background-image: url('./icons/background2.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 100%;
+    /* background-size: 100%; */
+    background-size: cover;
 }
 
 #main-home-banner {
@@ -18,14 +19,12 @@ body {
     font-size: 250%;
 }
 
+
 /* Mobile Responsive */
 
 /* Tablet Section */
 @media screen and (min-width: 768px)
 and (max-width: 1024px) {
-    body{
-        background-size: cover;
-    }
     #main-home-banner {
         z-index: -1;
         top: 68.5%;
@@ -39,9 +38,6 @@ and (max-width: 1024px) {
 /* Phone Section */
 
 @media screen and (max-width:767px) {
-    body{
-        background-size: cover;
-    }
     #main-home-banner {
         z-index: -1;
         top: 80%;

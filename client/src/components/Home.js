@@ -12,7 +12,8 @@ export default class Home extends React.Component {
             methods: [
                 this.addToCart,
                 this.takeAwayFromCart,
-                this.emptyCart
+                this.emptyCart,
+                this.getData
             ]
         }
     }
@@ -68,10 +69,14 @@ export default class Home extends React.Component {
     }
 
     render() {
+        const NavBarData = {
+            clearCart: this.state.methods[2],
+            getCart: this.state.methods[3],
+            cartCount: this.state.cartCount
+        }
         return(
             <div id='home-main-div'>
-                {/* <p id='main-home-banner'>Find Your Drive</p> */}
-                <NavBar data={this.state.cartCount}/>
+                <NavBar data={NavBarData}/>
                 <Routes methods={this.state.methods} />
             </div>
         )

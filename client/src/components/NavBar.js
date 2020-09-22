@@ -25,6 +25,7 @@ export default function NavBar(props) {
     const logout = () => {
         localStorage.setItem('loggedIn', 'false')
         localStorage.removeItem('id')
+        props.data.clearCart()
         closeMenu()
         setLoginStatus(false)
         setRenderHome(true)
@@ -43,8 +44,8 @@ export default function NavBar(props) {
     }
 
     // these methods get passed to <Login/> component
-    const login = (id) => {
-        // setUserId(id)
+    const login = () => {
+        props.data.getCart()
         setLoginStatus(true)
         setLoginRender(false)
         setRegisterRender(false)
@@ -113,7 +114,7 @@ export default function NavBar(props) {
                 <Link className='nav-link' onClick={closeMenu} to='/cars' id='cars'>Cars</Link>
                 <div id='cart-div'>
                     <Link className='nav-link' onClick={closeMenu} to='/cart' id='cart'>
-                        <span id='cart-count'>{props.data}</span>
+                        <span id='cart-count'>{props.data.cartCount}</span>
                     </Link>
                 </div>
                 {loggedIn ? 

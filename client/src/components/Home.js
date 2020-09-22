@@ -68,10 +68,13 @@ export default class Home extends React.Component {
     }
 
     render() {
+        const NavBarData = {
+            clearCart: this.state.methods[2],
+            cartCount: this.state.cartCount
+        }
         return(
             <div id='home-main-div'>
-                {/* <p id='main-home-banner'>Find Your Drive</p> */}
-                <NavBar data={this.state.cartCount}/>
+                <NavBar data={NavBarData}/>
                 <Routes methods={this.state.methods} />
             </div>
         )

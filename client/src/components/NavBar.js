@@ -69,9 +69,9 @@ export default function NavBar(props) {
     // navbar methods
     const openMenu = () => {
         // handle different screen widths
-        if (window.innerWidth > 1040) {
+        if (window.innerWidth > 1040 && window.innerHeight >= 768) {
             document.getElementById('links-div').style.width = '10%';
-        } else if (window.innerWidth >= 768) {
+        } else if (window.innerWidth >= 768 || window.innerWidth < 740 && window.innerHeight < 420) {
             document.getElementById('links-div').style.width = '20%'
         } else {
             document.getElementById('links-div').style.width = '100%'

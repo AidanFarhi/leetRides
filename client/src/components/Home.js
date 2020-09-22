@@ -12,7 +12,8 @@ export default class Home extends React.Component {
             methods: [
                 this.addToCart,
                 this.takeAwayFromCart,
-                this.emptyCart
+                this.emptyCart,
+                this.getData
             ]
         }
     }
@@ -70,6 +71,7 @@ export default class Home extends React.Component {
     render() {
         const NavBarData = {
             clearCart: this.state.methods[2],
+            getCart: this.state.methods[3],
             cartCount: this.state.cartCount
         }
         return(

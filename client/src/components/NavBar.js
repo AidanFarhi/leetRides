@@ -45,6 +45,7 @@ export default function NavBar(props) {
 
     // these methods get passed to <Login/> component
     const login = () => {
+        props.data.getCart()
         setLoginStatus(true)
         setLoginRender(false)
         setRegisterRender(false)

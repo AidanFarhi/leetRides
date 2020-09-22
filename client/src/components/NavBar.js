@@ -25,6 +25,7 @@ export default function NavBar(props) {
     const logout = () => {
         localStorage.setItem('loggedIn', 'false')
         localStorage.removeItem('id')
+        closeMenu()
         setLoginStatus(false)
         setRenderHome(true)
     }
